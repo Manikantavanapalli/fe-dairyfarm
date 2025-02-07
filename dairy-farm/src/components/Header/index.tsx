@@ -1,55 +1,32 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-dark text-white shadow-sm">
-      <nav className="navbar navbar-expand-lg navbar-dark container">
-        <a className="navbar-brand" href="/">
-          <img src="C:\Users\manik\OneDrive\Desktop\fe-Dairy-farm\dairy-farm\src\assets\images\LV Logo.png" alt="Dairy Farm Logo" style={{ width: '50px', height: 'auto' }} />
-          Dairy Farm
-        </a>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <div className="container">
+        <Link className="navbar-brand" to="/">Milk Dairy</Link>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <a className="nav-link active" aria-current="page" href="/">
-                Home
-              </a>
+              <Link className="nav-link" to="/products">Products</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/about">
-                About Us
-              </a>
+              <Link className="nav-link" to="/cart">Cart</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/products">
-                Our Products
-              </a>
+              <Link className="nav-link" to="/subscribe">Subscribe</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/contact">
-                Contact
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/blog">
-                Blog
-              </a>
+              <Link className="nav-link" to="/login">Login</Link>
             </li>
           </ul>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
   );
 };
 

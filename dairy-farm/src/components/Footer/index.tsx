@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer>
-      <p>&copy; 2025 Dairy Farm, All Rights Reserved.</p>
+    <footer className="bg-dark text-white text-center py-3 mt-4">
+      <p>© 2025 Milk Dairy. All Rights Reserved.</p>
     </footer>
   );
 };
