@@ -1,12 +1,13 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import MainLayout from '../../layouts/MainLayoutPage';
 
-const Home: React.FC = () => {
+const HomePage: React.FC = () => {
   return (
-    <div className="container text-center py-5 bg-light">
-      <h1 className="text-primary display-3">Welcome to the Dairy Farm!</h1>
-    </div>
+    <MainLayout>
+      <h1>Welcome to the Dairy Farm</h1>
+      <p>Explore our fresh farm products.</p>
+    </MainLayout>
   );
 };
 
-export default Home;
+export default HomePage;
