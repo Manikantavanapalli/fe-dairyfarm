@@ -3,6 +3,9 @@ import twoFiftyMl from '../../assets/images/250ml.png';
 import fiveHundredMl from '../../assets/images/500ML.png';
 import sevenFiftyMl from '../../assets/images/750ML.png';
 import oneLitre from '../../assets/images/1Litre.png';
+import banner1 from '../../assets/banners/Banner1.png';
+import banner2 from '../../assets/banners/Banner2.png';
+import banner3 from '../../assets/banners/Banner3.png';
 
 const LandingPage: React.FC = () => {
   return (
@@ -13,12 +16,31 @@ const LandingPage: React.FC = () => {
         <p className="lead">Fresh and pure buffalo milk delivered to your home.</p>
         <a href="/subscribe" className="btn btn-light btn-lg">Subscribe Now</a>
       </div>
-
+      {/* Carousel Banner Section */}
+      <div id="milkCarousel" className="carousel slide" data-bs-ride="carousel">
+        <div className="carousel-inner">
+          {[banner1, banner2, banner3].map((banner, index) => (
+            <div
+              className={`carousel-item ${index === 0 ? "active" : ""}`}
+              key={index}
+              data-bs-interval="5000"  // Auto-rotate every 5 seconds
+            >
+              <img src={banner} className="d-block w-100" alt={`Banner ${index + 1}`} />
+            </div>
+          ))}
+        </div>
+        <button className="carousel-control-prev" type="button" data-bs-target="#milkCarousel" data-bs-slide="prev">
+          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button className="carousel-control-next" type="button" data-bs-target="#milkCarousel" data-bs-slide="next">
+          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+      </div>
       {/* Products Section */}
       <div className="container my-5">
         <h2 className="mb-4 fw-bold">Our Milk Products</h2>
         <div className="row">
-          {[ 
+          {[
             { size: "250ml", price: 20, img: twoFiftyMl },
             { size: "500ml", price: 40, img: fiveHundredMl },
             { size: "750ml", price: 60, img: sevenFiftyMl },
