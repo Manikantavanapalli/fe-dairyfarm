@@ -61,32 +61,6 @@ const LandingPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Subscription Plans Section */}
-      <div className="container my-5">
-        <h2 className="text-center mb-4 fw-bold">Choose Your Subscription Plan</h2>
-        <div className="row">
-          {[
-            { name: "Weekly Plan", price: 140, duration: "7 Days", savings: "Save ₹0" },
-            { name: "Monthly Plan", price: 550, duration: "30 Days", savings: "Save ₹50" },
-            { name: "3 Months Plan", price: 1600, duration: "90 Days", savings: "Save ₹200" },
-            { name: "6 Months Plan", price: 3100, duration: "180 Days", savings: "Save ₹500" },
-            { name: "1 Year Plan", price: 6000, duration: "365 Days", savings: "Save ₹1000" }
-          ].map((plan, index) => (
-            <div className="col-md-4 mb-4" key={index}>
-              <div className="card shadow-sm border-0 h-100 text-center">
-                <div className="card-body">
-                  <h5 className="card-title fw-bold">{plan.name}</h5>
-                  <p className="card-text text-muted">{plan.duration}</p>
-                  <p className="text-success fw-bold fs-4">₹{plan.price}</p>
-                  <p className="text-danger fw-bold">{plan.savings}</p>
-                  <a href="/subscribe" className="btn btn-success w-100">Subscribe Now</a>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* Call to Action Section */}
       <div className="bg-light py-5">
         <h2 className="fw-bold">Why Choose Us?</h2>

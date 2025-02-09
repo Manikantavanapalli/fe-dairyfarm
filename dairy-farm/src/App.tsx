@@ -16,22 +16,23 @@ import NotFound from "./pages/NotFound";
 
 const App: React.FC = () => {
   return (
-    <MainLayout>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/products/:id" element={<ProductDetails />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/subscribe" element={<Subscribe />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+    <Routes>
+      {/* Use MainLayout for all routes */}
+      <Route path="/" element={<MainLayout />}>
+        <Route index element={<LandingPage />} />
+        <Route path="products" element={<Products />} />
+        <Route path="products/:id" element={<ProductDetails />} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="checkout" element={<Checkout />} />
+        <Route path="subscribe" element={<Subscribe />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="orders" element={<Orders />} />
+        <Route path="admin" element={<AdminDashboard />} />
         <Route path="*" element={<NotFound />} />
-      </Routes>
-    </MainLayout>
+      </Route>
+    </Routes>
   );
 };
 

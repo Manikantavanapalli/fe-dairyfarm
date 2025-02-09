@@ -1,13 +1,15 @@
-// src/components/MainLayout.tsx
 import React from "react";
-import Header from "../Header/index";
-import Footer from "../Footer/index";
+import Header from "../Header";
+import Footer from "../Footer";
+import { Outlet } from "react-router-dom";
 
-const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const MainLayout: React.FC = () => {
   return (
     <>
-      <Header />
-      <main className="container mt-4">{children}</main>
+      <Header isLoggedIn={false} />
+      <main className="container mt-4">
+        <Outlet /> {/* This renders the current page's content dynamically */}
+      </main>
       <Footer />
     </>
   );
