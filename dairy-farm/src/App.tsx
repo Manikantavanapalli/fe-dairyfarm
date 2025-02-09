@@ -13,6 +13,7 @@ import Profile from "./pages/Profile";
 import Orders from "./pages/Orders";
 import AdminDashboard from "./pages/AdminDashboard";
 import NotFound from "./pages/NotFound";
+import TestPage from "./pages/TestPage";
 
 const App: React.FC = () => {
   return (
@@ -31,6 +32,7 @@ const App: React.FC = () => {
         <Route path="orders" element={<Orders />} />
         <Route path="admin" element={<AdminDashboard />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/test" element={<TestPage />} />
       </Route>
     </Routes>
   );

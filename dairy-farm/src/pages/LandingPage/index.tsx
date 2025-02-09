@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import twoFiftyMl from '../../assets/images/250ml.png';
 import fiveHundredMl from '../../assets/images/500ML.png';
 import sevenFiftyMl from '../../assets/images/750ML.png';
@@ -8,6 +8,17 @@ import banner2 from '../../assets/banners/Banner2.png';
 import banner3 from '../../assets/banners/Banner3.png';
 
 const LandingPage: React.FC = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const banners = [banner1, banner2, banner3];
+
+  // Auto-slide every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="text-center">
       {/* Hero Section */}
@@ -18,14 +29,35 @@ const LandingPage: React.FC = () => {
       </div>
       
       {/* Carousel Section */}
-      <div className="w-full overflow-hidden mt-8">
-        <div className="flex transition-transform duration-500 ease-in-out">
-          {[banner1, banner2, banner3].map((banner, index) => (
-            <img key={index} src={banner} alt={`Banner ${index + 1}`} className="w-full" />
+      <div className="relative w-full max-w-7xl mx-auto mt-8">
+        <div className="relative w-full h-64 md:h-80 lg:h-96 xl:h-[500px] rounded-lg overflow-hidden shadow-lg">
+          {banners.map((banner, index) => (
+            <img
+              key={index}
+              src={banner}
+              alt={`Banner ${index + 1}`}
+              className={`absolute w-full h-full object-cover transition-opacity duration-1000 ${
+                index === currentIndex ? "opacity-100" : "opacity-0"
+              }`}
+            />
           ))}
         </div>
+
+        {/* Navigation Buttons */}
+        <button
+          onClick={() => setCurrentIndex((prevIndex) => (prevIndex - 1 + banners.length) % banners.length)}
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-md hover:bg-gray-200"
+        >
+          ❮
+        </button>
+        <button
+          onClick={() => setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length)}
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-md hover:bg-gray-200"
+        >
+          ❯
+        </button>
       </div>
-      
+
       {/* Products Section */}
       <div className="container mx-auto my-10">
         <h2 className="text-3xl font-bold mb-6">Our Milk Products</h2>
@@ -45,35 +77,6 @@ const LandingPage: React.FC = () => {
             </div>
           ))}
         </div>
-      </div>
-      
-      {/* Subscription Plans Section */}
-      <div className="container mx-auto my-10">
-        <h2 className="text-3xl font-bold text-center mb-6">Choose Your Subscription Plan</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { name: "Weekly Plan", price: 140, duration: "7 Days", savings: "Save ₹0" },
-            { name: "Monthly Plan", price: 550, duration: "30 Days", savings: "Save ₹50" },
-            { name: "3 Months Plan", price: 1600, duration: "90 Days", savings: "Save ₹200" },
-            { name: "6 Months Plan", price: 3100, duration: "180 Days", savings: "Save ₹500" },
-            { name: "1 Year Plan", price: 6000, duration: "365 Days", savings: "Save ₹1000" }
-          ].map((plan, index) => (
-            <div key={index} className="bg-white shadow-lg rounded-lg p-6 text-center border border-gray-200">
-              <h5 className="text-xl font-bold">{plan.name}</h5>
-              <p className="text-gray-500">{plan.duration}</p>
-              <p className="text-green-600 text-lg font-bold">₹{plan.price}</p>
-              <p className="text-red-500 font-semibold">{plan.savings}</p>
-              <a href="/subscribe" className="block mt-3 bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">Subscribe Now</a>
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      {/* Why Choose Us Section */}
-      <div className="bg-gray-100 py-12 text-center">
-        <h2 className="text-3xl font-bold">Why Choose Us?</h2>
-        <p className="text-lg mt-2">We deliver the freshest buffalo milk straight from our farm to your doorstep.</p>
-        <a href="/subscribe" className="mt-4 inline-block bg-green-500 text-white px-6 py-2 text-lg font-bold rounded-md shadow-md hover:bg-green-600">Subscribe Now</a>
       </div>
     </div>
   );
