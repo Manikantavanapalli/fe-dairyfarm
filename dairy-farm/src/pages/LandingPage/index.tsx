@@ -10,62 +10,70 @@ import banner3 from '../../assets/banners/Banner3.png';
 const LandingPage: React.FC = () => {
   return (
     <div className="text-center">
-      {/* Banner Section */}
-      <div className="bg-success text-white py-5">
-        <h1 className="display-4">Welcome to Milk Dairy</h1>
-        <p className="lead">Fresh and pure buffalo milk delivered to your home.</p>
-        <a href="/subscribe" className="btn btn-light btn-lg">Subscribe Now</a>
+      {/* Hero Section */}
+      <div className="bg-green-600 text-white py-12">
+        <h1 className="text-4xl font-bold">Welcome to Milk Dairy</h1>
+        <p className="text-lg mt-2">Fresh and pure buffalo milk delivered to your home.</p>
+        <a href="/subscribe" className="mt-4 inline-block bg-white text-green-600 px-6 py-2 text-lg font-bold rounded-md shadow-md hover:bg-gray-200">Subscribe Now</a>
       </div>
-      {/* Carousel Banner Section */}
-      <div id="milkCarousel" className="carousel slide" data-bs-ride="carousel">
-        <div className="carousel-inner">
+      
+      {/* Carousel Section */}
+      <div className="w-full overflow-hidden mt-8">
+        <div className="flex transition-transform duration-500 ease-in-out">
           {[banner1, banner2, banner3].map((banner, index) => (
-            <div
-              className={`carousel-item ${index === 0 ? "active" : ""}`}
-              key={index}
-              data-bs-interval="5000"  // Auto-rotate every 5 seconds
-            >
-              <img src={banner} className="d-block w-100" alt={`Banner ${index + 1}`} />
-            </div>
+            <img key={index} src={banner} alt={`Banner ${index + 1}`} className="w-full" />
           ))}
         </div>
-        <button className="carousel-control-prev" type="button" data-bs-target="#milkCarousel" data-bs-slide="prev">
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-        </button>
-        <button className="carousel-control-next" type="button" data-bs-target="#milkCarousel" data-bs-slide="next">
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-        </button>
       </div>
+      
       {/* Products Section */}
-      <div className="container my-5">
-        <h2 className="mb-4 fw-bold">Our Milk Products</h2>
-        <div className="row">
+      <div className="container mx-auto my-10">
+        <h2 className="text-3xl font-bold mb-6">Our Milk Products</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {[
             { size: "250ml", price: 20, img: twoFiftyMl },
             { size: "500ml", price: 40, img: fiveHundredMl },
             { size: "750ml", price: 60, img: sevenFiftyMl },
             { size: "1 Litre", price: 80, img: oneLitre }
           ].map((product, index) => (
-            <div className="col-md-3 mb-4" key={index}>
-              <div className="card h-100 shadow border-0">
-                <img src={product.img} className="card-img-top p-3" alt={`${product.size} Buffalo Milk`} />
-                <div className="card-body">
-                  <h5 className="card-title fw-bold">{product.size} Buffalo Milk</h5>
-                  <p className="card-text text-muted">Fresh, pure & creamy – Perfect for your family!</p>
-                  <p className="text-success fw-bold fs-4">₹{product.price}</p>
-                  <a href="/cart" className="btn btn-primary w-100">Add to Cart</a>
-                </div>
-              </div>
+            <div key={index} className="bg-white shadow-lg rounded-lg overflow-hidden p-4 text-center">
+              <img src={product.img} alt={product.size} className="w-24 mx-auto" />
+              <h5 className="text-xl font-bold mt-2">{product.size} Buffalo Milk</h5>
+              <p className="text-gray-500">Fresh, pure & creamy</p>
+              <p className="text-green-600 text-lg font-bold">₹{product.price}</p>
+              <a href="/cart" className="block mt-3 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Add to Cart</a>
             </div>
           ))}
         </div>
       </div>
-
-      {/* Call to Action Section */}
-      <div className="bg-light py-5">
-        <h2 className="fw-bold">Why Choose Us?</h2>
-        <p className="lead">We deliver the freshest buffalo milk straight from our farm to your doorstep.</p>
-        <a href="/subscribe" className="btn btn-success btn-lg px-4 py-2 rounded-pill shadow-sm">Subscribe Now</a>
+      
+      {/* Subscription Plans Section */}
+      <div className="container mx-auto my-10">
+        <h2 className="text-3xl font-bold text-center mb-6">Choose Your Subscription Plan</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {[
+            { name: "Weekly Plan", price: 140, duration: "7 Days", savings: "Save ₹0" },
+            { name: "Monthly Plan", price: 550, duration: "30 Days", savings: "Save ₹50" },
+            { name: "3 Months Plan", price: 1600, duration: "90 Days", savings: "Save ₹200" },
+            { name: "6 Months Plan", price: 3100, duration: "180 Days", savings: "Save ₹500" },
+            { name: "1 Year Plan", price: 6000, duration: "365 Days", savings: "Save ₹1000" }
+          ].map((plan, index) => (
+            <div key={index} className="bg-white shadow-lg rounded-lg p-6 text-center border border-gray-200">
+              <h5 className="text-xl font-bold">{plan.name}</h5>
+              <p className="text-gray-500">{plan.duration}</p>
+              <p className="text-green-600 text-lg font-bold">₹{plan.price}</p>
+              <p className="text-red-500 font-semibold">{plan.savings}</p>
+              <a href="/subscribe" className="block mt-3 bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600">Subscribe Now</a>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      {/* Why Choose Us Section */}
+      <div className="bg-gray-100 py-12 text-center">
+        <h2 className="text-3xl font-bold">Why Choose Us?</h2>
+        <p className="text-lg mt-2">We deliver the freshest buffalo milk straight from our farm to your doorstep.</p>
+        <a href="/subscribe" className="mt-4 inline-block bg-green-500 text-white px-6 py-2 text-lg font-bold rounded-md shadow-md hover:bg-green-600">Subscribe Now</a>
       </div>
     </div>
   );
