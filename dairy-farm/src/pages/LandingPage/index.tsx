@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import twoFiftyMl from '../../assets/images/250ml.png';
-import fiveHundredMl from '../../assets/images/500ML.png';
-import sevenFiftyMl from '../../assets/images/750ML.png';
-import oneLitre from '../../assets/images/1Litre.png';
-import banner1 from '../../assets/banners/Banner1.png';
-import banner2 from '../../assets/banners/Banner2.png';
-import banner3 from '../../assets/banners/Banner3.png';
+import twoFiftyMl from "../../assets/images/250ml.png";
+import fiveHundredMl from "../../assets/images/500ML.png";
+import sevenFiftyMl from "../../assets/images/750ML.png";
+import oneLitre from "../../assets/images/1Litre.png";
+import banner1 from "../../assets/banners/Banner1.png";
+import banner2 from "../../assets/banners/Banner2.png";
+import banner3 from "../../assets/banners/Banner3.png";
 
 const LandingPage: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,16 +14,16 @@ const LandingPage: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="text-center bg-gradient-to-b from-blue-50 to-blue-100 min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-blue-100 text-gray-800">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-green-500 to-green-600 text-white py-16 px-6 rounded-b-3xl shadow-lg">
-        <h1 className="text-5xl font-extrabold tracking-wide">Welcome to Milk Dairy 🥛</h1>
-        <p className="text-lg mt-3 opacity-90">
+      <div className="bg-gradient-to-r from-green-600 to-green-500 text-white py-20 px-6 text-center rounded-b-3xl shadow-lg">
+        <h1 className="text-5xl font-extrabold">Welcome to Milk Dairy 🥛</h1>
+        <p className="text-lg mt-4 opacity-90">
           Fresh and pure buffalo milk delivered straight to your home.
         </p>
         <a
@@ -42,54 +42,66 @@ const LandingPage: React.FC = () => {
               key={index}
               src={banner}
               alt={`Banner ${index + 1}`}
-              className={`absolute w-full h-full object-cover transition-opacity duration-1000 rounded-xl shadow-lg ${
-                index === currentIndex ? "opacity-100 scale-100" : "opacity-0 scale-95"
-              }`}
+              className={`absolute w-full h-full object-cover transition-opacity duration-1000 rounded-xl shadow-lg ${index === currentIndex ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                }`}
             />
           ))}
         </div>
-
-        {/* Navigation Buttons */}
-        <button
-          onClick={() => setCurrentIndex((prevIndex) => (prevIndex - 1 + banners.length) % banners.length)}
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-md hover:bg-gray-100 transition-all"
-        >
-          ❮
-        </button>
-        <button
-          onClick={() => setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length)}
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white p-3 rounded-full shadow-md hover:bg-gray-100 transition-all"
-        >
-          ❯
-        </button>
       </div>
 
       {/* Products Section */}
-      <div className="container mx-auto my-12 px-6">
-        <h2 className="text-4xl font-extrabold text-gray-800">Our Milk Products 🥛</h2>
+      <div className="container mx-auto my-12 px-6 text-center">
+        <h2 className="text-4xl font-extrabold">Our Milk Products 🥛</h2>
         <p className="text-gray-600 text-lg mt-2">High-quality fresh milk in various sizes.</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mt-8">
-          {[
-            { size: "250ml", price: 20, img: twoFiftyMl },
-            { size: "500ml", price: 40, img: fiveHundredMl },
-            { size: "750ml", price: 60, img: sevenFiftyMl },
-            { size: "1 Litre", price: 80, img: oneLitre }
+          {[{ size: "250ml", price: 20, img: twoFiftyMl },
+          { size: "500ml", price: 40, img: fiveHundredMl },
+          { size: "750ml", price: 60, img: sevenFiftyMl },
+          { size: "1 Litre", price: 80, img: oneLitre }
           ].map((product, index) => (
-            <div
-              key={index}
-              className="bg-white shadow-lg rounded-xl overflow-hidden p-5 text-center hover:shadow-2xl transition-all transform hover:scale-105"
-            >
+            <div key={index} className="bg-white shadow-lg rounded-xl p-5 text-center hover:shadow-2xl transition-all transform hover:scale-105">
               <img src={product.img} alt={product.size} className="w-28 mx-auto" />
-              <h5 className="text-2xl font-bold mt-3 text-gray-800">{product.size} Buffalo Milk</h5>
+              <h5 className="text-2xl font-bold mt-3">{product.size} Buffalo Milk</h5>
               <p className="text-gray-500 mt-1">Fresh, pure & creamy</p>
               <p className="text-green-600 text-xl font-extrabold mt-2">₹{product.price}</p>
-              <a
-                href="/cart"
-                className="block mt-4 bg-blue-500 text-white py-2 px-6 rounded-full font-bold hover:bg-blue-600 transition-all"
-              >
-                Add to Cart 🛒
-              </a>
+              <a href="/cart" className="block mt-4 bg-blue-500 text-white py-2 px-6 rounded-full font-bold hover:bg-blue-600 transition-all">Add to Cart 🛒</a>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Why Choose Us Section */}
+      <div className="bg-green-100 py-16 px-6 text-center rounded-3xl mx-4 shadow-lg">
+        <h2 className="text-4xl font-extrabold text-green-700">Why Choose Us? 🌱</h2>
+        <p className="text-gray-600 text-lg mt-2 max-w-2xl mx-auto">We ensure fresh and high-quality milk with organic farming practices.</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+          {[
+            { title: "100% Pure", desc: "No preservatives, no additives." },
+            { title: "Organic Farming", desc: "We follow ethical dairy farming methods." },
+            { title: "Daily Fresh Delivery", desc: "Milk delivered straight from farm to your home." }
+          ].map((feature, index) => (
+            <div key={index} className="bg-white shadow-md rounded-xl p-6 hover:shadow-xl transition-all">
+              <h3 className="text-2xl font-bold text-green-600">{feature.title}</h3>
+              <p className="text-gray-500 mt-2">{feature.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Testimonials Section */}
+      <div className="py-16 px-6 text-center mx-4">
+        <h2 className="text-4xl font-extrabold text-gray-800">Customer Testimonials 💬</h2>
+        <p className="text-gray-600 text-lg mt-2">What our customers say about us.</p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+          {[
+            { name: "Ravi Kumar", review: "The best milk I have ever tasted!" },
+            { name: "Sneha Reddy", review: "Pure, fresh, and delivered on time." },
+            { name: "Amit Sharma", review: "Highly recommend their service!" }
+          ].map((testimonial, index) => (
+            <div key={index} className="bg-white shadow-md rounded-xl p-6 hover:shadow-xl transition-all">
+              <p className="text-lg italic">"{testimonial.review}"</p>
+              <h4 className="text-xl font-bold mt-4 text-green-600">- {testimonial.name}</h4>
             </div>
           ))}
         </div>
