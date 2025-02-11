@@ -1,8 +1,9 @@
-import React, { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom"; // No <Router> here
+import React, { lazy, Suspense, useState } from "react";
+import { Routes, Route } from "react-router-dom";  // Remove Router
 import MainLayout from "../layouts/MainLayoutPage";
 import Skeleton from "../components/Skeleton";
-import TestPage from "../pages/TestPage";
+import PrivateRoute from "../components/ProtectedRoute";
+import AdminRoute from "../components/AdminRoute";
 
 // Lazy-loaded components
 const LandingPage = lazy(() => import("../pages/LandingPage"));
@@ -15,10 +16,16 @@ const Login = lazy(() => import("../pages/Login"));
 const Register = lazy(() => import("../pages/Register"));
 const Profile = lazy(() => import("../pages/Profile"));
 const Orders = lazy(() => import("../pages/Orders"));
-const AdminDashboard = lazy(() => import("../pages/AdminDashboard"));
 const NotFound = lazy(() => import("../pages/NotFound"));
+const TestPage = lazy(() => import("../pages/TestPage"));
+const AdminDashboard = lazy(() => import("../pages/Admin/AdminDashboard"));
+const ManageOrders = lazy(() => import("../pages/Admin/ManageOrders"));
+const ManageProducts = lazy(() => import("../pages/Admin/ManageProducts"));
+const ManageUsers = lazy(() => import("../pages/Admin/ManageUsers"));
 
 const AppRoutes: React.FC = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
+
   return (
     <Suspense fallback={<Skeleton />}>
       <Routes>
@@ -26,16 +33,23 @@ const AppRoutes: React.FC = () => {
           <Route index element={<LandingPage />} />
           <Route path="products" element={<Products />} />
           <Route path="products/:id" element={<ProductDetails />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="checkout" element={<Checkout />} />
           <Route path="subscribe" element={<Subscribe />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="admin" element={<AdminDashboard />} />
           <Route path="testpage" element={<TestPage />} />
           <Route path="*" element={<NotFound />} />
+
+          {/* Private Routes */}
+          <Route path="cart" element={<PrivateRoute isAuthenticated={isAuthenticated}><Cart /></PrivateRoute>} />
+          <Route path="checkout" element={<PrivateRoute isAuthenticated={isAuthenticated}><Checkout /></PrivateRoute>} />
+          <Route path="profile" element={<PrivateRoute isAuthenticated={isAuthenticated}><Profile /></PrivateRoute>} />
+          <Route path="orders" element={<PrivateRoute isAuthenticated={isAuthenticated}><Orders /></PrivateRoute>} />
+
+          {/* Admin Routes */}
+          <Route path="admin" element={<AdminRoute isAuthenticated={isAuthenticated}><AdminDashboard /></AdminRoute>} />
+          <Route path="admin/orders" element={<AdminRoute isAuthenticated={isAuthenticated}><ManageOrders /></AdminRoute>} />
+          <Route path="admin/products" element={<AdminRoute isAuthenticated={isAuthenticated}><ManageProducts /></AdminRoute>} />
+          <Route path="admin/users" element={<AdminRoute isAuthenticated={isAuthenticated}><ManageUsers /></AdminRoute>} />
         </Route>
       </Routes>
     </Suspense>

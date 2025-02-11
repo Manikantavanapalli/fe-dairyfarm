@@ -5,6 +5,7 @@ import Pagination from "../../components/pagination";
 import SearchBar from "../../components/SearchBar";
 import ButtonBtn from "../../components/Button";
 import ProductCard from "../../components/productCard";
+import Rating from "../../components/Rating";
 
 const TestPage: React.FC = () => {
 
@@ -31,6 +32,8 @@ const TestPage: React.FC = () => {
       <ProductCard image={""} title={""} price={""} description={""} onAddToCart={function (): void {
         throw new Error("Function not implemented.");
       } }/>
+
+      <Rating rating={2}/>
 
     </div>
   );
