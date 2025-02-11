@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, User, ShoppingCart, LogOut, LogIn, UserPlus } from "lucide-react";
 import logo from "../../assets/images/LV Logo.png";
 
@@ -10,12 +10,26 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ isLoggedIn, userName }) => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const menuItems = [
     { path: "/products", label: "Products" },
-    { path: "/cart", label: "Cart", icon: <ShoppingCart size={18} className="inline-block ml-1" /> },
+    {
+      path: "/cart",
+      label: "Cart",
+      icon: <ShoppingCart size={18} className="inline-block ml-1" />,
+      requiresAuth: true, // Flag to check authentication
+    },
     { path: "/subscribe", label: "Subscribe" },
   ];
+
+  const handleNavigation = (path: string, requiresAuth?: boolean) => {
+    if (requiresAuth && !isLoggedIn) {
+      navigate("/login"); // Redirect to login if not authenticated
+    } else {
+      navigate(path);
+    }
+  };
 
   return (
     <nav className="bg-white shadow-md p-4 sticky top-0 z-50">
@@ -27,26 +41,21 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, userName }) => {
         </Link>
 
         {/* Mobile Menu Button */}
-        <button
-          className="lg:hidden focus:outline-none"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
+        <button className="lg:hidden focus:outline-none" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
 
         {/* Navbar Links */}
-        <div
-          className={`lg:flex items-center space-x-6 ${menuOpen ? "block" : "hidden"} lg:block absolute lg:relative bg-white lg:bg-transparent top-full left-0 w-full lg:w-auto shadow-lg lg:shadow-none p-4 lg:p-0`}
-        >
+        <div className={`lg:flex items-center space-x-6 ${menuOpen ? "block" : "hidden"} lg:block`}>
           <ul className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-6 text-lg">
             {menuItems.map((item, index) => (
               <li key={index}>
-                <Link
-                  to={item.path}
+                <button
+                  onClick={() => handleNavigation(item.path, item.requiresAuth)}
                   className="hover:text-green-500 transition flex items-center"
                 >
                   {item.label} {item.icon}
-                </Link>
+                </button>
               </li>
             ))}
           </ul>
@@ -59,8 +68,12 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, userName }) => {
                 <span>Hello, {userName}</span>
               </button>
               <div className="hidden group-hover:block absolute right-0 bg-white shadow-lg rounded-lg mt-2 w-40">
-                <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">Profile</Link>
-                <Link to="/orders" className="block px-4 py-2 hover:bg-gray-100">Orders</Link>
+                <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">
+                  Profile
+                </Link>
+                <Link to="/orders" className="block px-4 py-2 hover:bg-gray-100">
+                  Orders
+                </Link>
                 <Link to="/logout" className="block px-4 py-2 text-red-600 hover:bg-gray-100 flex items-center">
                   <LogOut size={16} className="mr-2" /> Logout
                 </Link>

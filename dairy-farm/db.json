@@ -17,6 +17,20 @@
       "name": "saigiri",
       "email": "sai@gmail.com",
       "password": "1234"
+    },
+    {
+      "id": "1c4a",
+      "name": "manikanta vanapalli",
+      "email": "mani@gmail.com",
+      "password": "1234",
+      "address": "texas\nroad no2"
+    },
+    {
+      "id": "97ec",
+      "name": "sivakumae",
+      "email": "siva@gmail.com",
+      "password": "1234",
+      "address": "skota"
     }
   ]
 }

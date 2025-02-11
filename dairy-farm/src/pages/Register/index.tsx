@@ -1,30 +1,37 @@
 import React, { useState } from "react";
-import { registerUser } from "../../services/api";
+import { registerUser } from "../../services/AuthService";
+import { Link } from "react-router-dom";
 
 const Register: React.FC = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [address, setAddress] = useState("");
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    address: "",
+  });
+
   const [success, setSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Handle input changes
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setSuccess(false);
 
     try {
-      await registerUser(name, email, password, address);
+      await registerUser(formData.name, formData.email, formData.password, formData.address);
       setSuccess(true);
-      setName("");
-      setEmail("");
-      setPassword("");
-      setAddress("");
-    } catch (err) {
-      setError("Registration failed. Try again.");
+      setFormData({ name: "", email: "", password: "", address: "" });
+    } catch (err: any) {
+      setError(err.response?.data?.message || "Registration failed. Try again.");
     }
-  };
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-green-100 to-blue-100 px-6">
@@ -33,27 +40,34 @@ const Register: React.FC = () => {
         <h2 className="text-3xl font-extrabold text-center text-gray-800">Create an Account 🚀</h2>
         <p className="text-gray-500 text-center mt-2">Join us today!</p>
 
+        {/* Success Message */}
         {success && (
           <div className="bg-green-100 text-green-600 p-3 my-3 text-sm rounded-md text-center">
             🎉 Registration successful!
           </div>
         )}
 
+        {/* Error Message */}
         {error && (
           <div className="bg-red-100 text-red-600 p-3 my-3 text-sm rounded-md text-center">
             {error}
           </div>
         )}
 
+        {/* Registration Form */}
         <form onSubmit={handleSubmit} className="mt-6">
           {/* Name Input */}
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-1">Full Name</label>
+            <label className="block text-gray-700 font-medium mb-1" htmlFor="name">
+              Full Name
+            </label>
             <input
               type="text"
+              id="name"
+              name="name"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={formData.name}
+              onChange={handleChange}
               placeholder="Enter your full name"
               required
             />
@@ -61,12 +75,16 @@ const Register: React.FC = () => {
 
           {/* Email Input */}
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-1">Email</label>
+            <label className="block text-gray-700 font-medium mb-1" htmlFor="email">
+              Email
+            </label>
             <input
               type="email"
+              id="email"
+              name="email"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={formData.email}
+              onChange={handleChange}
               placeholder="Enter your email"
               required
             />
@@ -74,12 +92,16 @@ const Register: React.FC = () => {
 
           {/* Password Input */}
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-1">Password</label>
+            <label className="block text-gray-700 font-medium mb-1" htmlFor="password">
+              Password
+            </label>
             <input
               type="password"
+              id="password"
+              name="password"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={formData.password}
+              onChange={handleChange}
               placeholder="Create a password"
               required
             />
@@ -87,11 +109,15 @@ const Register: React.FC = () => {
 
           {/* Address Input */}
           <div className="mb-4">
-            <label className="block text-gray-700 font-medium mb-1">Address</label>
+            <label className="block text-gray-700 font-medium mb-1" htmlFor="address">
+              Address
+            </label>
             <textarea
+              id="address"
+              name="address"
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
+              value={formData.address}
+              onChange={handleChange}
               placeholder="Enter your address"
               rows={3}
               required
@@ -110,9 +136,9 @@ const Register: React.FC = () => {
         {/* Login Link */}
         <p className="text-sm text-gray-500 text-center mt-5">
           Already have an account?{" "}
-          <a href="/login" className="text-blue-600 font-medium hover:underline">
+          <Link to="/login" className="text-blue-600 font-medium hover:underline">
             Login here
-          </a>
+          </Link>
         </p>
       </div>
     </div>
