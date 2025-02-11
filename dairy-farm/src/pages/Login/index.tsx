@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { loginUser } from "../../services/api";
+import { loginUser } from "../../services/AuthService";
+import logo from "../../assets/images/LV Logo.png";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -23,6 +24,11 @@ const Login: React.FC = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-200 px-6">
       {/* Login Card */}
       <div className="w-full max-w-md bg-white shadow-lg rounded-2xl p-8 border border-gray-200">
+        {/* Logo */}
+        <div className="flex justify-center mb-4">
+          <img src={logo} alt="Logo" className="h-16 w-auto" />
+        </div>
+
         <h2 className="text-3xl font-extrabold text-center text-gray-800">Welcome Back 👋</h2>
         <p className="text-gray-500 text-center mt-2">Login to continue</p>
 
