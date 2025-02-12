@@ -48,9 +48,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     // Register function
-    const register = async (name: string, email: string, password: string) => {
+    const register = async (name: string, email: string) => {
         try {
-            const response = await fakeApiRegister(name, email, password);
+            const response = await fakeApiRegister(name, email);
 
             if (response.success && response.user) { // Ensure user exists
                 setUser(response.user);
@@ -107,7 +107,7 @@ const fakeApiLogin = async (email: string, password: string) => {
     });
 };
 
-const fakeApiRegister = async (name: string, email: string, password: string) => {
+const fakeApiRegister = async (name: string, email: string) => {
     return new Promise<{ success: boolean; user?: User; message?: string }>((resolve) => {
         setTimeout(() => {
             if (email.includes("@")) {
