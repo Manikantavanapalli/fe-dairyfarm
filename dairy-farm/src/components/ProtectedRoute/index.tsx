@@ -1,13 +1,15 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
-interface ProtectedRouteProps {
-  isAuthenticated: boolean;
+interface PrivateRouteProps {
   children: React.ReactNode;
 }
 
-const PrivateRoute: React.FC<ProtectedRouteProps> = ({ isAuthenticated, children }) => {
-  return isAuthenticated ? children : <Navigate to="/login" />;
+const PrivateRoute: React.FC<PrivateRouteProps> = ({ children }) => {
+  const { user } = useAuth(); // Get user authentication status
+
+  return user ? <>{children}</> : <Navigate to="/login" replace />;
 };
 
 export default PrivateRoute;

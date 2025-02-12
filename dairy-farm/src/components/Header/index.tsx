@@ -38,9 +38,9 @@ const Header: React.FC = () => {
               <Link to="/products" className="flex items-center">Products</Link>
             </li>
             <li>
-              <Link to="/cart" className="flex items-center">
+              <button onClick={() => handleNavigation("/cart", true)} className="flex items-center">
                 Cart <ShoppingCart size={18} className="ml-1" />
-              </Link>
+              </button>
             </li>
             <li>
               <Link to="/subscribe" className="flex items-center">Subscribe</Link>
@@ -53,8 +53,8 @@ const Header: React.FC = () => {
               <span className="flex items-center">
                 <User size={20} className="mr-2" /> Hello, {user.name}
               </span>
-              <Link to="/profile" className="flex items-center">Profile</Link>
-              <Link to="/orders" className="flex items-center">Orders</Link>
+              <button onClick={() => handleNavigation("/profile", true)} className="flex items-center">Profile</button>
+              <button onClick={() => handleNavigation("/orders", true)} className="flex items-center">Orders</button>
               <button
                 onClick={() => {
                   logout();

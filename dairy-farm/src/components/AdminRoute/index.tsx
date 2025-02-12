@@ -1,13 +1,16 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 interface AdminRouteProps {
-  isAuthenticated: boolean;
   children: React.ReactNode;
 }
 
-const AdminRoute: React.FC<AdminRouteProps> = ({ isAuthenticated, children }) => {
-  return isAuthenticated ? children : <Navigate to="/login" />;
+const AdminRoute: React.FC<AdminRouteProps> = ({ children }) => {
+  const { user } = useAuth(); // Get user authentication status
+
+  return user && user.role === "admin" ? <>{children}</> : <Navigate to="/login" replace />;
 };
 
 export default AdminRoute;
+
