@@ -1,31 +1,17 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, User, ShoppingCart, LogOut, LogIn, UserPlus } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
 import logo from "../../assets/images/LV Logo.png";
 
-interface HeaderProps {
-  isLoggedIn: boolean;
-  userName?: string;
-}
-
-const Header: React.FC<HeaderProps> = ({ isLoggedIn, userName }) => {
+const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-
-  const menuItems = [
-    { path: "/products", label: "Products" },
-    {
-      path: "/cart",
-      label: "Cart",
-      icon: <ShoppingCart size={18} className="inline-block ml-1" />,
-      requiresAuth: true, // Flag to check authentication
-    },
-    { path: "/subscribe", label: "Subscribe" },
-  ];
+  const { user, logout } = useAuth();
 
   const handleNavigation = (path: string, requiresAuth?: boolean) => {
-    if (requiresAuth && !isLoggedIn) {
-      navigate("/login"); // Redirect to login if not authenticated
+    if (requiresAuth && !user) {
+      navigate("/login");
     } else {
       navigate(path);
     }
@@ -48,43 +34,43 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, userName }) => {
         {/* Navbar Links */}
         <div className={`lg:flex items-center space-x-6 ${menuOpen ? "block" : "hidden"} lg:block`}>
           <ul className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-6 text-lg">
-            {menuItems.map((item, index) => (
-              <li key={index}>
-                <button
-                  onClick={() => handleNavigation(item.path, item.requiresAuth)}
-                  className="hover:text-green-500 transition flex items-center"
-                >
-                  {item.label} {item.icon}
-                </button>
-              </li>
-            ))}
+            <li>
+              <Link to="/products" className="flex items-center">Products</Link>
+            </li>
+            <li>
+              <Link to="/cart" className="flex items-center">
+                Cart <ShoppingCart size={18} className="ml-1" />
+              </Link>
+            </li>
+            <li>
+              <Link to="/subscribe" className="flex items-center">Subscribe</Link>
+            </li>
           </ul>
 
           {/* User Section */}
-          {isLoggedIn ? (
-            <div className="relative group">
-              <button className="flex items-center space-x-2 font-semibold focus:outline-none">
-                <User size={20} />
-                <span>Hello, {userName}</span>
+          {user ? (
+            <div className="flex items-center space-x-4">
+              <span className="flex items-center">
+                <User size={20} className="mr-2" /> Hello, {user.name}
+              </span>
+              <Link to="/profile" className="flex items-center">Profile</Link>
+              <Link to="/orders" className="flex items-center">Orders</Link>
+              <button
+                onClick={() => {
+                  logout();
+                  navigate("/login");
+                }}
+                className="flex items-center text-red-600"
+              >
+                <LogOut size={16} className="mr-2" /> Logout
               </button>
-              <div className="hidden group-hover:block absolute right-0 bg-white shadow-lg rounded-lg mt-2 w-40">
-                <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">
-                  Profile
-                </Link>
-                <Link to="/orders" className="block px-4 py-2 hover:bg-gray-100">
-                  Orders
-                </Link>
-                <Link to="/logout" className="block px-4 py-2 text-red-600 hover:bg-gray-100 flex items-center">
-                  <LogOut size={16} className="mr-2" /> Logout
-                </Link>
-              </div>
             </div>
           ) : (
             <div className="flex space-x-3">
-              <Link to="/login" className="btn btn-primary flex items-center px-4 py-2 rounded-lg shadow-md">
+              <Link to="/login" className="flex items-center px-4 py-2 rounded-lg shadow-md">
                 <LogIn size={18} className="mr-2" /> Login
               </Link>
-              <Link to="/register" className="btn btn-success flex items-center px-4 py-2 rounded-lg shadow-md">
+              <Link to="/register" className="flex items-center px-4 py-2 rounded-lg shadow-md">
                 <UserPlus size={18} className="mr-2" /> Register
               </Link>
             </div>
