@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 interface Subscription {
   name: string;
@@ -24,12 +25,10 @@ const Subscribe: React.FC = () => {
   const [cart, setCart] = useState<Subscription[]>([]);
   const [checkout, setCheckout] = useState(false);
 
-  // Handle Input Changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Validate if all required fields are filled
   const isFormValid = () => {
     return (
       formData.name.trim() !== "" &&
@@ -39,25 +38,33 @@ const Subscribe: React.FC = () => {
     );
   };
 
-  // Handle Add to Cart
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (isFormValid()) {
-      setCart([...cart, formData]); // Add subscription to cart
-      setFormData({
-        name: "",
-        address: "",
-        pincode: "",
-        deliverySchedule: "Morning (6:00 AM - 9:00 AM)",
-        subscriptionDuration: "One Day",
-        milkQuantity: "250ml",
-        customQuantity: "",
-      });
+      try {
+        const response = await axios.post("/api/subscriptions", formData);
+        setCart([...cart, response.data]);
+        setFormData({
+          name: "",
+          address: "",
+          pincode: "",
+          deliverySchedule: "Morning (6:00 AM - 9:00 AM)",
+          subscriptionDuration: "One Day",
+          milkQuantity: "250ml",
+          customQuantity: "",
+        });
+      } catch (error) {
+        console.error("Error adding subscription to cart:", error);
+      }
     }
   };
 
-  // Handle Checkout Process
-  const handleCheckout = () => {
-    setCheckout(true);
+  const handleCheckout = async () => {
+    try {
+      await axios.post("/api/checkout", { subscriptions: cart });
+      setCheckout(true);
+    } catch (error) {
+      console.error("Error during checkout:", error);
+    }
   };
 
   return (

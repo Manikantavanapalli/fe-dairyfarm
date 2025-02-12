@@ -7,10 +7,13 @@ interface AdminRouteProps {
 }
 
 const AdminRoute: React.FC<AdminRouteProps> = ({ children }) => {
-  const { user } = useAuth(); // Get user authentication status
+  const { user } = useAuth();
 
-  return user && user.role === "admin" ? <>{children}</> : <Navigate to="/login" replace />;
+  if (!user || user.role !== "admin") {
+    return <Navigate to="/" />;
+  }
+
+  return <>{children}</>;
 };
 
 export default AdminRoute;
-

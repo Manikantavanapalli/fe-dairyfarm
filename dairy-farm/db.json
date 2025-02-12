@@ -4,33 +4,51 @@
       "id": "1",
       "name": "John Doe",
       "email": "john@example.com",
-      "password": "123456"
+      "password": "123456",
+      "role": "user"
     },
     {
-      "id": "350d",
-      "name": "manikanta",
-      "email": "mani@gmail.com",
-      "password": "1234"
+      "id": "2",
+      "name": "Jane Doe",
+      "email": "jane@example.com",
+      "password": "123456",
+      "role": "admin"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "250ml Buffalo Milk",
+      "price": "₹20",
+      "description": "Fresh, pure & creamy",
+      "img": "https://example.com/250ml.png"
     },
     {
-      "id": "d1b6",
-      "name": "saigiri",
-      "email": "sai@gmail.com",
-      "password": "1234"
+      "id": "2",
+      "name": "500ml Buffalo Milk",
+      "price": "₹40",
+      "description": "High-quality fresh milk",
+      "img": "https://example.com/500ml.png"
+    }
+  ],
+  "carts": [
+    {
+      "id": "1",
+      "userId": "1",
+      "items": []
     },
     {
-      "id": "1c4a",
-      "name": "manikanta vanapalli",
-      "email": "mani@gmail.com",
-      "password": "1234",
-      "address": "texas\nroad no2"
-    },
-    {
-      "id": "97ec",
-      "name": "sivakumae",
-      "email": "siva@gmail.com",
-      "password": "1234",
-      "address": "skota"
+      "id": "2",
+      "userId": "2",
+      "items": [
+        {
+          "id": 2,
+          "productId": 2,
+          "name": "500ml Buffalo Milk",
+          "price": 40,
+          "quantity": 1
+        }
+      ]
     }
   ]
 }
