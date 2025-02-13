@@ -24,19 +24,17 @@ const Cart: React.FC<CartProps> = ({ currentUser }) => {
 
     const fetchCart = async () => {
       try {
-        // Fetch the user's cart
         const response = await axios.get(`http://localhost:5000/carts?userId=${currentUser}`);
         if (response.data.length > 0) {
           const userCart = response.data[0];
-          setCartId(userCart.id); // Set the cart ID
+          setCartId(userCart.id);
           setCartItems(userCart.items);
         } else {
-          // If the user doesn't have a cart, create one
           const newCartResponse = await axios.post("http://localhost:5000/carts", {
             userId: currentUser,
             items: [],
           });
-          setCartId(newCartResponse.data.id); // Set the new cart ID
+          setCartId(newCartResponse.data.id);
           setCartItems(newCartResponse.data.items);
         }
       } catch (error) {
@@ -51,31 +49,24 @@ const Cart: React.FC<CartProps> = ({ currentUser }) => {
     if (!currentUser || !cartId) return;
 
     try {
-      // Fetch the user's cart
       const cartResponse = await axios.get(`http://localhost:5000/carts/${cartId}`);
       const userCart = cartResponse.data;
 
-      // Find the item to update
       const itemToUpdate = userCart.items.find((item: CartItem) => item.id === id);
       if (!itemToUpdate) return;
 
-      // Calculate the new quantity
       const newQuantity = itemToUpdate.quantity + change;
 
       if (newQuantity <= 0) {
-        // Remove the item if the quantity is 0 or less
         userCart.items = userCart.items.filter((item: CartItem) => item.id !== id);
       } else {
-        // Update the item quantity
         userCart.items = userCart.items.map((item: CartItem) =>
           item.id === id ? { ...item, quantity: newQuantity } : item
         );
       }
 
-      // Update the cart on the server
       await axios.put(`http://localhost:5000/carts/${cartId}`, userCart);
 
-      // Refresh the cart
       const updatedCartResponse = await axios.get(`http://localhost:5000/carts/${cartId}`);
       setCartItems(updatedCartResponse.data.items);
     } catch (error) {
@@ -87,17 +78,13 @@ const Cart: React.FC<CartProps> = ({ currentUser }) => {
     if (!currentUser || !cartId) return;
 
     try {
-      // Fetch the user's cart
       const cartResponse = await axios.get(`http://localhost:5000/carts/${cartId}`);
       const userCart = cartResponse.data;
 
-      // Remove the item from the cart
       userCart.items = userCart.items.filter((item: CartItem) => item.id !== id);
 
-      // Update the cart on the server
       await axios.put(`http://localhost:5000/carts/${cartId}`, userCart);
 
-      // Refresh the cart
       const updatedCartResponse = await axios.get(`http://localhost:5000/carts/${cartId}`);
       setCartItems(updatedCartResponse.data.items);
     } catch (error) {
@@ -158,7 +145,7 @@ const Cart: React.FC<CartProps> = ({ currentUser }) => {
             </div>
 
             <button
-              onClick={() => navigate("/checkout")}
+              onClick={() => navigate("/checkout", { state: { cartItems } })}
               className="w-full bg-blue-600 text-white py-3 rounded-lg mt-6 font-semibold text-lg hover:bg-blue-700 transition"
             >
               Proceed to Checkout →

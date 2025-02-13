@@ -1,23 +1,27 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+}
 
 const Checkout: React.FC = () => {
   const navigate = useNavigate();
-
-  // Sample Cart Data (Replace with actual state/context)
-  const cartItems = [
-    { id: 1, name: "250ml Buffalo Milk", price: 20, quantity: 1 },
-    { id: 2, name: "500ml Buffalo Milk", price: 40, quantity: 2 },
-  ];
+  const location = useLocation();
+  const cartItems: CartItem[] = location.state?.cartItems || [];
 
   const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   // Form State
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     address: "",
     phone: "",
+    pincode: "",
+    landmark: "",
     paymentMethod: "Cash on Delivery",
   });
 
@@ -28,11 +32,53 @@ const Checkout: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  // Save Order to Backend
+  const saveOrder = async () => {
+    const order = {
+      id: `ORD${Math.floor(Math.random() * 1000000)}`, // Generate a unique order ID
+      userId: "1", // Replace with actual user ID from your auth system
+      date: new Date().toLocaleDateString("en-GB", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+      }),
+      total: `₹${totalPrice}`,
+      status: "Pending",
+      items: cartItems,
+      shippingDetails: formData,
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(order),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save order");
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error saving order:", error);
+    }
+  };
+
   // Handle Form Submission
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.name && formData.email && formData.address && formData.phone) {
-      setOrderPlaced(true);
+    if (formData.name && formData.address && formData.phone && formData.pincode) {
+      const order = await saveOrder();
+      if (order) {
+        setOrderPlaced(true);
+        setTimeout(() => {
+          navigate("/orders");
+        }, 3000); // Navigate after 3 seconds
+      }
     }
   };
 
@@ -91,15 +137,6 @@ const Checkout: React.FC = () => {
                   className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <input
-                  type="email"
-                  name="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <input
                   type="tel"
                   name="phone"
                   placeholder="Phone Number"
@@ -114,6 +151,23 @@ const Checkout: React.FC = () => {
                   value={formData.address}
                   onChange={handleChange}
                   required
+                  className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <input
+                  type="text"
+                  name="pincode"
+                  placeholder="Pincode"
+                  value={formData.pincode}
+                  onChange={handleChange}
+                  required
+                  className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                <input
+                  type="text"
+                  name="landmark"
+                  placeholder="Landmark (Optional)"
+                  value={formData.landmark}
+                  onChange={handleChange}
                   className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
 
@@ -141,9 +195,9 @@ const Checkout: React.FC = () => {
                   </button>
                   <button
                     type="submit"
-                    disabled={!formData.name || !formData.email || !formData.address || !formData.phone}
+                    disabled={!formData.name || !formData.address || !formData.phone || !formData.pincode}
                     className={`py-3 px-6 rounded-lg text-lg font-bold transition shadow-lg ${
-                      formData.name && formData.email && formData.address && formData.phone
+                      formData.name && formData.address && formData.phone && formData.pincode
                         ? "bg-green-600 text-white hover:bg-green-700"
                         : "bg-gray-400 text-gray-200 cursor-not-allowed"
                     }`}

@@ -48,6 +48,97 @@
       "price": "₹40",
       "description": "High-quality fresh milk",
       "img": "https://example.com/500ml.png"
+    },
+    {
+      "id": "3",
+      "name": "1 Litre Cow Milk",
+      "price": "₹50",
+      "description": "Pure and nutritious cow milk",
+      "img": "https://example.com/1litre-cow-milk.png"
+    },
+    {
+      "id": "4",
+      "name": "500ml Cow Milk",
+      "price": "₹30",
+      "description": "Fresh and healthy cow milk",
+      "img": "https://example.com/500ml-cow-milk.png"
+    },
+    {
+      "id": "5",
+      "name": "1 Litre Buffalo Milk",
+      "price": "₹60",
+      "description": "Rich and creamy buffalo milk",
+      "img": "https://example.com/1litre-buffalo-milk.png"
+    },
+    {
+      "id": "6",
+      "name": "200g Paneer",
+      "price": "₹80",
+      "description": "Fresh and soft paneer",
+      "img": "https://example.com/200g-paneer.png"
+    },
+    {
+      "id": "7",
+      "name": "500g Curd",
+      "price": "₹40",
+      "description": "Creamy and delicious curd",
+      "img": "https://example.com/500g-curd.png"
+    },
+    {
+      "id": "8",
+      "name": "1kg Butter",
+      "price": "₹200",
+      "description": "Pure and rich butter",
+      "img": "https://example.com/1kg-butter.png"
+    },
+    {
+      "id": "9",
+      "name": "500g Ghee",
+      "price": "₹300",
+      "description": "Pure and aromatic ghee",
+      "img": "https://example.com/500g-ghee.png"
+    },
+    {
+      "id": "10",
+      "name": "200ml Flavoured Milk (Chocolate)",
+      "price": "₹25",
+      "description": "Delicious chocolate-flavoured milk",
+      "img": "https://example.com/200ml-chocolate-milk.png"
+    },
+    {
+      "id": "11",
+      "name": "200ml Flavoured Milk (Strawberry)",
+      "price": "₹25",
+      "description": "Refreshing strawberry-flavoured milk",
+      "img": "https://example.com/200ml-strawberry-milk.png"
+    },
+    {
+      "id": "12",
+      "name": "500ml Toned Milk",
+      "price": "₹25",
+      "description": "Low-fat and healthy toned milk",
+      "img": "https://example.com/500ml-toned-milk.png"
+    },
+    {
+      "id": "13",
+      "name": "1 Litre Skimmed Milk",
+      "price": "₹40",
+      "description": "Fat-free and nutritious skimmed milk",
+      "img": "https://example.com/1litre-skimmed-milk.png"
+    },
+    {
+      "id": "14",
+      "name": "200g Cheese",
+      "price": "₹120",
+      "description": "Fresh and creamy cheese",
+      "img": "https://example.com/200g-cheese.png"
+    },
+    {
+      "id": "15",
+      "name": "500ml Lassi",
+      "price": "₹30",
+      "description": "Refreshing and traditional lassi",
+      "img": "https://example.com/500ml-lassi.png"
     }
   ],
   "carts": [
@@ -60,30 +151,32 @@
           "productId": "2",
           "name": "500ml Buffalo Milk",
           "price": 40,
-          "quantity": 1
+          "quantity": 2
         }
       ]
     },
     {
-      "id": "2",
-      "userId": "2",
+      "id": "d4da",
+      "userId": "3",
       "items": [
         {
-          "id": 2,
-          "productId": 2,
+          "id": 1739445766026,
+          "productId": "2",
           "name": "500ml Buffalo Milk",
+          "price": 40,
+          "quantity": 1
+        },
+        {
+          "id": 1739445769374,
+          "productId": "7",
+          "name": "500g Curd",
           "price": 40,
           "quantity": 1
         }
       ]
     },
     {
-      "id": "6e39",
-      "userId": "3",
-      "items": []
-    },
-    {
-      "id": "d5ca",
+      "id": "17f7",
       "userId": "3",
       "items": []
     }
@@ -94,28 +187,56 @@
       "userId": "1",
       "date": "Feb 5, 2024",
       "total": "₹500",
-      "status": "Delivered"
+      "status": "Delivered",
+      "items": [
+        {
+          "id": 1739438255801,
+          "productId": "2",
+          "name": "500ml Buffalo Milk",
+          "price": 40,
+          "quantity": 2
+        }
+      ],
+      "shippingDetails": {
+        "name": "John Doe",
+        "address": "123, Green Avenue, New Delhi, India",
+        "phone": "+91 9550450945",
+        "pincode": "110001",
+        "landmark": "Near Park",
+        "paymentMethod": "Cash on Delivery"
+      }
     },
     {
-      "id": "ORD124",
+      "id": "ORD130510",
       "userId": "1",
-      "date": "Feb 8, 2024",
-      "total": "₹750",
-      "status": "Processing"
+      "date": "13 Feb 2025",
+      "total": "₹80",
+      "status": "Pending",
+      "items": [
+        {
+          "id": 1739445766026,
+          "productId": "2",
+          "name": "500ml Buffalo Milk",
+          "price": 40,
+          "quantity": 1
+        },
+        {
+          "id": 1739445769374,
+          "productId": "7",
+          "name": "500g Curd",
+          "price": 40,
+          "quantity": 1
+        }
+      ],
+      "shippingDetails": {
+        "name": "manikanta vanapalli",
+        "address": "texas\nroad no2",
+        "phone": "+91 9876543234",
+        "pincode": "J5B1Y1",
+        "landmark": "",
+        "paymentMethod": "Cash on Delivery"
+      }
     }
   ],
-  "subscriptions": [
-    {
-      "userId": "1",
-      "plan": "Monthly",
-      "quantity": "1 Litre",
-      "delivery": "Morning (6:00 AM - 9:00 AM)"
-    },
-    {
-      "userId": "2",
-      "plan": "3 Months",
-      "quantity": "500ml",
-      "delivery": "Evening (5:00 PM - 8:00 PM)"
-    }
-  ]
+  "subscriptions": []
 }

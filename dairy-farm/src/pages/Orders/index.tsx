@@ -1,26 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+interface Order {
+  id: string;
+  userId: string;
+  date: string;
+  total: string;
+  status: "Delivered" | "Pending" | "Canceled";
+  items: {
+    id: number;
+    name: string;
+    price: number;
+    quantity: number;
+  }[];
+  shippingDetails: {
+    name: string;
+    address: string;
+    phone: string;
+    pincode: string;
+    landmark: string;
+    paymentMethod: string;
+  };
+}
 
 const Orders = () => {
-  // Static Order Data (Can be fetched from API)
-  const initialOrders = [
-    { id: "ORD001", date: "Feb 5, 2024", status: "Delivered", amount: "₹500" },
-    { id: "ORD002", date: "Feb 8, 2024", status: "Pending", amount: "₹750" },
-    { id: "ORD003", date: "Feb 10, 2024", status: "Canceled", amount: "₹400" },
-  ];
-
-  const [orders, setOrders] = useState(initialOrders);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [filter, setFilter] = useState("All");
 
-  // Filter Orders Based on Status
-  const filteredOrders = filter === "All" ? orders : orders.filter(order => order.status === filter);
+  // Fetch Orders from Mock API
+  useEffect(() => {
+    fetch("http://localhost:5000/orders")
+      .then((response) => response.json())
+      .then((data: Order[]) => setOrders(data))
+      .catch((error) => console.error("Error fetching orders:", error));
+  }, []);
+
+  const filteredOrders = filter === "All" ? orders : orders.filter((order) => order.status === filter);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-10 px-6 flex justify-center">
       <div className="w-full max-w-5xl bg-white shadow-xl rounded-2xl p-8 border border-gray-200">
-        {/* Page Title */}
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-6">📜 Order History</h2>
-
-        {/* Filter Buttons */}
         <div className="flex justify-center space-x-3 mb-6">
           {["All", "Delivered", "Pending", "Canceled"].map((status) => (
             <button
@@ -36,8 +55,6 @@ const Orders = () => {
             </button>
           ))}
         </div>
-
-        {/* Order Table */}
         {filteredOrders.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full border-collapse bg-gray-50 shadow-md rounded-lg">
@@ -67,7 +84,7 @@ const Orders = () => {
                         {order.status}
                       </span>
                     </td>
-                    <td className="py-3 px-5 font-semibold">{order.amount}</td>
+                    <td className="py-3 px-5 font-semibold">{order.total}</td>
                   </tr>
                 ))}
               </tbody>
