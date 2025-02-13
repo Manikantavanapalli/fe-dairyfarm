@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 const MainLayout: React.FC = () => {
   return (
     <>
-      <Header isLoggedIn={false} />
+      <Header />
       <main className="container mt-4">
         <Outlet /> {/* This renders the current page's content dynamically */}
       </main>
