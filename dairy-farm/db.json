@@ -5,14 +5,33 @@
       "name": "John Doe",
       "email": "john@example.com",
       "password": "123456",
-      "role": "user"
+      "role": "user",
+      "phone": "+91 9550450945",
+      "address": "123, Green Avenue, New Delhi, India",
+      "pincode": "110001",
+      "profileImage": "https://via.placeholder.com/150"
     },
     {
       "id": "2",
       "name": "Jane Doe",
       "email": "jane@example.com",
       "password": "123456",
-      "role": "admin"
+      "role": "admin",
+      "phone": "+91 9876543210",
+      "address": "456, Red Avenue, Mumbai, India",
+      "pincode": "400001",
+      "profileImage": "https://via.placeholder.com/150"
+    },
+    {
+      "id": "3",
+      "name": "Vanapalli manikanta",
+      "email": "mani@gmail.com",
+      "password": "123456",
+      "role": "user",
+      "phone": "+91 9876543210",
+      "address": "456, Red Avenue, Mumbai, India",
+      "pincode": "355678",
+      "profileImage": "https://via.placeholder.com/150"
     }
   ],
   "products": [
@@ -35,7 +54,15 @@
     {
       "id": "1",
       "userId": "1",
-      "items": []
+      "items": [
+        {
+          "id": 1739438255801,
+          "productId": "2",
+          "name": "500ml Buffalo Milk",
+          "price": 40,
+          "quantity": 1
+        }
+      ]
     },
     {
       "id": "2",
@@ -49,6 +76,46 @@
           "quantity": 1
         }
       ]
+    },
+    {
+      "id": "6e39",
+      "userId": "3",
+      "items": []
+    },
+    {
+      "id": "d5ca",
+      "userId": "3",
+      "items": []
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD123",
+      "userId": "1",
+      "date": "Feb 5, 2024",
+      "total": "₹500",
+      "status": "Delivered"
+    },
+    {
+      "id": "ORD124",
+      "userId": "1",
+      "date": "Feb 8, 2024",
+      "total": "₹750",
+      "status": "Processing"
+    }
+  ],
+  "subscriptions": [
+    {
+      "userId": "1",
+      "plan": "Monthly",
+      "quantity": "1 Litre",
+      "delivery": "Morning (6:00 AM - 9:00 AM)"
+    },
+    {
+      "userId": "2",
+      "plan": "3 Months",
+      "quantity": "500ml",
+      "delivery": "Evening (5:00 PM - 8:00 PM)"
     }
   ]
 }

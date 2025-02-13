@@ -41,7 +41,7 @@ const AppRoutes: React.FC = () => {
           {/* Private Routes (Only accessible after login) */}
           <Route path="cart" element={<PrivateRoute><Cart currentUser={user ? user.id : null} /></PrivateRoute>}/>
           <Route path="checkout" element={<PrivateRoute><Checkout /></PrivateRoute>}/>
-          <Route path="profile" element={<PrivateRoute><Profile /></PrivateRoute>}/>
+          <Route path="profile" element={<PrivateRoute><Profile userId={user?.id as string} /></PrivateRoute>} />
           <Route path="orders" element={<PrivateRoute> <Orders /></PrivateRoute>}/>
 
           {/* Admin Routes (Only accessible for admin users) */}
