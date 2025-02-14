@@ -74,19 +74,19 @@ const Profile: React.FC<ProfileProps> = ({ userId }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="w-full max-w-2xl bg-white shadow-lg rounded-xl p-8 border border-gray-200">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-purple-50 px-4">
+      <div className="w-full max-w-2xl bg-white shadow-2xl rounded-2xl overflow-hidden transform transition-all duration-500 hover:scale-105">
         
         {/* Profile Picture */}
-        <div className="flex flex-col items-center relative">
+        <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 p-6">
           <label htmlFor="profileImage" className="cursor-pointer relative group">
             <img 
               src={profilePreview || user.profileImage} 
               alt="Profile" 
-              className="w-32 h-32 rounded-full shadow-lg border-4 border-blue-500 object-cover transition-transform transform group-hover:scale-105"
+              className="w-32 h-32 rounded-full shadow-2xl border-4 border-white object-cover transition-transform transform group-hover:scale-110"
             />
             {isEditing && (
-              <span className="absolute bottom-0 right-0 bg-blue-600 text-white px-2 py-1 text-xs rounded-full shadow-md">
+              <span className="absolute bottom-0 right-0 bg-white text-blue-600 px-2 py-1 text-xs rounded-full shadow-md">
                 📷 Edit
               </span>
             )}
@@ -103,9 +103,9 @@ const Profile: React.FC<ProfileProps> = ({ userId }) => {
         </div>
 
         {/* Profile Form */}
-        <div className="mt-6">
+        <div className="p-8">
           {isEditing ? (
-            <div className="space-y-4">
+            <div className="space-y-6">
               {["name", "phone", "address", "pincode"].map((field) => (
                 <div key={field} className="flex flex-col">
                   <label className="text-gray-700 font-medium capitalize">{field}</label>
@@ -114,7 +114,7 @@ const Profile: React.FC<ProfileProps> = ({ userId }) => {
                     name={field} 
                     value={editedUser ? (editedUser as any)[field] : ""} 
                     onChange={handleChange} 
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                   />
                 </div>
               ))}
@@ -131,16 +131,16 @@ const Profile: React.FC<ProfileProps> = ({ userId }) => {
                 />
               </div>
 
-              <div className="flex space-x-4 mt-4">
+              <div className="flex space-x-4 mt-6">
                 <button 
                   onClick={handleSave} 
-                  className="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition shadow-md"
+                  className="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   ✅ Save
                 </button>
                 <button 
                   onClick={() => setIsEditing(false)} 
-                  className="flex-1 bg-gray-500 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-gray-600 transition shadow-md"
+                  className="flex-1 bg-gray-500 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-gray-600 transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   ❌ Cancel
                 </button>
@@ -148,14 +148,14 @@ const Profile: React.FC<ProfileProps> = ({ userId }) => {
             </div>
           ) : (
             <div className="text-center">
-              <h2 className="text-3xl font-bold text-gray-800">{user.name}</h2>
-              <p className="text-gray-600 mt-2">{user.email}</p>
-              <p className="text-gray-600">{user.phone}</p>
-              <p className="text-gray-600">{user.address}, {user.pincode}</p>
+              <h2 className="text-4xl font-bold text-gray-800 mb-2">{user.name}</h2>
+              <p className="text-gray-600 text-lg">{user.email}</p>
+              <p className="text-gray-600 text-lg">{user.phone}</p>
+              <p className="text-gray-600 text-lg">{user.address}, {user.pincode}</p>
 
               <button 
                 onClick={handleEditClick} 
-                className="mt-6 bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition shadow-md"
+                className="mt-8 bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 ✏️ Edit Profile
               </button>
