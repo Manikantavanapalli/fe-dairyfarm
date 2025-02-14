@@ -20,7 +20,7 @@
       "phone": "+91 9876543210",
       "address": "456, Red Avenue, Mumbai, India",
       "pincode": "400001",
-      "profileImage": "https://via.placeholder.com/150"
+      "profileImage": "https://randomuser.me/api/portraits/men/1.jpg"
     },
     {
       "id": "3",
@@ -28,10 +28,10 @@
       "email": "mani@gmail.com",
       "password": "123456",
       "role": "user",
-      "phone": "+91 9876543210",
+      "phone": "+91 9876543216",
       "address": "456, Red Avenue, Mumbai, India",
       "pincode": "355678",
-      "profileImage": "https://via.placeholder.com/150"
+      "profileImage": "https://randomuser.me/api/portraits/men/2.jpg"
     }
   ],
   "products": [
@@ -160,18 +160,11 @@
       "userId": "3",
       "items": [
         {
-          "id": 1739445766026,
+          "id": 1739518140425,
           "productId": "2",
           "name": "500ml Buffalo Milk",
           "price": 40,
-          "quantity": 1
-        },
-        {
-          "id": 1739445769374,
-          "productId": "7",
-          "name": "500g Curd",
-          "price": 40,
-          "quantity": 1
+          "quantity": 2
         }
       ]
     },
