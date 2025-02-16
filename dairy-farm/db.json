@@ -32,6 +32,13 @@
       "address": "456, Red Avenue, Mumbai, India",
       "pincode": "355678",
       "profileImage": "https://randomuser.me/api/portraits/men/2.jpg"
+    },
+    {
+      "id": "b6ad",
+      "name": "sivakumar Meesala",
+      "email": "siva@gmail.com",
+      "password": "123456",
+      "address": "9492929473"
     }
   ],
   "products": [
