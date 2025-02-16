@@ -38,9 +38,8 @@ const Header: React.FC = () => {
 
         {/* Navbar Links and User Section */}
         <div
-          className={`lg:flex lg:items-center lg:space-x-6 ${
-            menuOpen ? "block" : "hidden"
-          } lg:block mt-4 lg:mt-0`}
+          className={`lg:flex lg:items-center lg:space-x-6 ${menuOpen ? "block" : "hidden"
+            } lg:block mt-4 lg:mt-0`}
         >
           <ul className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-6 text-lg">
             <li>

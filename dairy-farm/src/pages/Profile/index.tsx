@@ -76,13 +76,13 @@ const Profile: React.FC<ProfileProps> = ({ userId }) => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-purple-50 px-4">
       <div className="w-full max-w-2xl bg-white shadow-2xl rounded-2xl overflow-hidden transform transition-all duration-500 hover:scale-105">
-        
+
         {/* Profile Picture */}
         <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 p-6">
           <label htmlFor="profileImage" className="cursor-pointer relative group">
-            <img 
-              src={profilePreview || user.profileImage} 
-              alt="Profile" 
+            <img
+              src={profilePreview || user.profileImage}
+              alt="Profile"
               className="w-32 h-32 rounded-full shadow-2xl border-4 border-white object-cover transition-transform transform group-hover:scale-110"
             />
             {isEditing && (
@@ -92,11 +92,11 @@ const Profile: React.FC<ProfileProps> = ({ userId }) => {
             )}
           </label>
           {isEditing && (
-            <input 
-              type="file" 
-              id="profileImage" 
-              accept="image/*" 
-              onChange={handleImageChange} 
+            <input
+              type="file"
+              id="profileImage"
+              accept="image/*"
+              onChange={handleImageChange}
               className="hidden"
             />
           )}
@@ -109,11 +109,11 @@ const Profile: React.FC<ProfileProps> = ({ userId }) => {
               {["name", "phone", "address", "pincode"].map((field) => (
                 <div key={field} className="flex flex-col">
                   <label className="text-gray-700 font-medium capitalize">{field}</label>
-                  <input 
-                    type="text" 
-                    name={field} 
-                    value={editedUser ? (editedUser as any)[field] : ""} 
-                    onChange={handleChange} 
+                  <input
+                    type="text"
+                    name={field}
+                    value={editedUser ? (editedUser as any)[field] : ""}
+                    onChange={handleChange}
                     className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300"
                   />
                 </div>
@@ -122,24 +122,24 @@ const Profile: React.FC<ProfileProps> = ({ userId }) => {
               {/* Email - Read-only */}
               <div className="flex flex-col">
                 <label className="text-gray-700 font-medium">Email</label>
-                <input 
-                  type="text" 
-                  name="email" 
-                  value={user.email} 
-                  readOnly 
+                <input
+                  type="text"
+                  name="email"
+                  value={user.email}
+                  readOnly
                   className="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 text-gray-500 cursor-not-allowed"
                 />
               </div>
 
               <div className="flex space-x-4 mt-6">
-                <button 
-                  onClick={handleSave} 
+                <button
+                  onClick={handleSave}
                   className="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   ✅ Save
                 </button>
-                <button 
-                  onClick={() => setIsEditing(false)} 
+                <button
+                  onClick={() => setIsEditing(false)}
                   className="flex-1 bg-gray-500 text-white px-6 py-3 rounded-lg text-lg font-semibold hover:bg-gray-600 transition-all duration-300 shadow-lg hover:shadow-xl"
                 >
                   ❌ Cancel
@@ -153,8 +153,8 @@ const Profile: React.FC<ProfileProps> = ({ userId }) => {
               <p className="text-gray-600 text-lg">{user.phone}</p>
               <p className="text-gray-600 text-lg">{user.address}, {user.pincode}</p>
 
-              <button 
-                onClick={handleEditClick} 
+              <button
+                onClick={handleEditClick}
                 className="mt-8 bg-blue-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 ✏️ Edit Profile

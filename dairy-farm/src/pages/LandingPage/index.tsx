@@ -56,9 +56,8 @@ const LandingPage: React.FC = () => {
               key={index}
               src={banner}
               alt={`Banner ${index + 1}`}
-              className={`absolute w-full h-full object-cover transition-opacity duration-1000 rounded-xl shadow-lg ${
-                index === currentIndex ? "opacity-100 scale-100" : "opacity-0 scale-95"
-              }`}
+              className={`absolute w-full h-full object-cover transition-opacity duration-1000 rounded-xl shadow-lg ${index === currentIndex ? "opacity-100 scale-100" : "opacity-0 scale-95"
+                }`}
             />
           ))}
         </div>

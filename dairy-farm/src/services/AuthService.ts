@@ -18,7 +18,7 @@ export const loginUser = async (email: string, password: string) => {
   try {
     const response = await axios.get(API_URL);
     const users = response.data;
-    
+
     // Find user with matching email and password
     const user = users.find((u: any) => u.email === email && u.password === password);
 
