@@ -13,6 +13,14 @@ interface Product {
   img: string;
 }
 
+interface CartItem {
+  id: number;
+  productId: number;
+  name: string;
+  price: number;
+  quantity: number;
+}
+
 interface ProductsProps {
   currentUser: string | null;
 }
@@ -30,7 +38,7 @@ const Products: React.FC<ProductsProps> = ({ currentUser }) => {
       try {
         const response = await axios.get<Product[]>("http://localhost:5000/products");
         setProducts(response.data);
-        setFilteredProducts(response.data); // Initialize filtered products
+        setFilteredProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -39,29 +47,63 @@ const Products: React.FC<ProductsProps> = ({ currentUser }) => {
     fetchProducts();
   }, []);
 
-  // Handle search
   const handleSearch = (query: string) => {
     setSearchQuery(query);
     const filtered = products.filter((product) =>
       product.name.toLowerCase().includes(query.toLowerCase())
     );
     setFilteredProducts(filtered);
-    setCurrentPage(1); // Reset to the first page after search
+    setCurrentPage(1);
   };
 
-  // Handle pagination
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
-  // Calculate the products to display on the current page
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
 
-  function handleAddToCart(product: Product): void {
-    throw new Error("Function not implemented.");
-  }
+  const handleAddToCart = async (product: Product) => {
+    if (!currentUser) {
+      alert("Please log in to add items to the cart.");
+      return;
+    }
+
+    try {
+      const cartResponse = await axios.get(`http://localhost:5000/carts?userId=${currentUser}`);
+      let userCart = cartResponse.data[0];
+
+      if (!userCart) {
+        const newCartResponse = await axios.post("http://localhost:5000/carts", {
+          userId: currentUser,
+          items: [],
+        });
+        userCart = newCartResponse.data;
+      }
+
+      const existingItem = userCart.items.find((item: CartItem) => item.productId === product.id);
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        userCart.items.push({
+          id: Date.now(),
+          productId: product.id,
+          name: product.name,
+          price: parseFloat(product.price.replace("₹", "")),
+          quantity: 1,
+        });
+      }
+
+      await axios.put(`http://localhost:5000/carts/${userCart.id}`, userCart);
+
+      alert("Product added to cart!");
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+      alert("An error occurred while adding the product to the cart.");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white py-12 px-6">
@@ -73,15 +115,13 @@ const Products: React.FC<ProductsProps> = ({ currentUser }) => {
         </p>
       </div>
 
-      {/* Search Bar */}
       <SearchBar onSearch={handleSearch} />
 
-      {/* Product Grid */}
       <div className="max-w-7xl mx-auto mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {currentProducts.map((product) => (
           <div key={product.id} className="bg-white shadow-lg rounded-xl p-5 hover:scale-105 transition-all">
             <ProductCard
-              image={product.img}
+              image={product.img || "https://via.placeholder.com/150"}
               title={product.name}
               price={product.price}
               description={product.description}
@@ -91,7 +131,6 @@ const Products: React.FC<ProductsProps> = ({ currentUser }) => {
         ))}
       </div>
 
-      {/* Pagination */}
       <Pagination
         currentPage={currentPage}
         totalPages={Math.ceil(filteredProducts.length / productsPerPage)}
