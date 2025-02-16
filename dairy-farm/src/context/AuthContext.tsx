@@ -4,6 +4,7 @@ import { loginUser, logoutUser, getCurrentUser } from "../services/AuthService";
 
 // Define User type
 interface User {
+  profileImage: string | undefined;
   id: string;
   name: string;
   email: string;
