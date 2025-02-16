@@ -40,105 +40,105 @@
       "name": "250ml Buffalo Milk",
       "price": "₹20",
       "description": "Fresh, pure & creamy",
-      "img": "https://example.com/250ml.png"
+      "img": "https://erdencreamery.com/wp-content/uploads/2021/05/erdern-creamery-buffalo-milk.jpg"
     },
     {
       "id": "2",
       "name": "500ml Buffalo Milk",
       "price": "₹40",
       "description": "High-quality fresh milk",
-      "img": "https://example.com/500ml.png"
+      "img": "https://erdencreamery.com/wp-content/uploads/2021/05/erdern-creamery-buffalo-milk.jpg"
     },
     {
       "id": "3",
       "name": "1 Litre Cow Milk",
       "price": "₹50",
       "description": "Pure and nutritious cow milk",
-      "img": "https://example.com/1litre-cow-milk.png"
+      "img": "https://brundavanfarms.com/wp-content/uploads/2020/08/raw-cow-milk-1-litre.jpg"
     },
     {
       "id": "4",
       "name": "500ml Cow Milk",
       "price": "₹30",
       "description": "Fresh and healthy cow milk",
-      "img": "https://example.com/500ml-cow-milk.png"
+      "img": "https://brundavanfarms.com/wp-content/uploads/2020/08/raw-cow-milk-1-litre.jpg"
     },
     {
       "id": "5",
       "name": "1 Litre Buffalo Milk",
       "price": "₹60",
       "description": "Rich and creamy buffalo milk",
-      "img": "https://example.com/1litre-buffalo-milk.png"
+      "img": "https://brundavanfarms.com/wp-content/uploads/2020/08/raw-buffalo-milk-1-litre.jpg"
     },
     {
       "id": "6",
       "name": "200g Paneer",
       "price": "₹80",
       "description": "Fresh and soft paneer",
-      "img": "https://example.com/200g-paneer.png"
+      "img": "https://www.towntokri.com/wp-content/uploads/2020/06/amul-fresh-paneer-200g.jpg"
     },
     {
       "id": "7",
       "name": "500g Curd",
       "price": "₹40",
       "description": "Creamy and delicious curd",
-      "img": "https://example.com/500g-curd.png"
+      "img": "https://www.amazon.in/images/I/71c9Wi9Z6lL._SX522_.jpg"
     },
     {
       "id": "8",
       "name": "1kg Butter",
       "price": "₹200",
       "description": "Pure and rich butter",
-      "img": "https://example.com/1kg-butter.png"
+      "img": "https://www.iceland.co.uk/images/I/71HHEf2UZtL._SX522_.jpg"
     },
     {
       "id": "9",
       "name": "500g Ghee",
       "price": "₹300",
       "description": "Pure and aromatic ghee",
-      "img": "https://example.com/500g-ghee.png"
+      "img": "https://www.iceland.co.uk/images/I/71c9Wi9Z6lL._SX522_.jpg"
     },
     {
       "id": "10",
       "name": "200ml Flavoured Milk (Chocolate)",
       "price": "₹25",
       "description": "Delicious chocolate-flavoured milk",
-      "img": "https://example.com/200ml-chocolate-milk.png"
+      "img": "https://www.woolworths.com.au/images/I/71Mv1B+vjeL._SX522_.jpg"
     },
     {
       "id": "11",
       "name": "200ml Flavoured Milk (Strawberry)",
       "price": "₹25",
       "description": "Refreshing strawberry-flavoured milk",
-      "img": "https://example.com/200ml-strawberry-milk.png"
+      "img": "https://www.woolworths.com.au/images/I/71Wzp0LXwIL._SX522_.jpg"
     },
     {
       "id": "12",
       "name": "500ml Toned Milk",
       "price": "₹25",
       "description": "Low-fat and healthy toned milk",
-      "img": "https://example.com/500ml-toned-milk.png"
+      "img": "https://www.amazon.in/images/I/71uQXos2exL._SX522_.jpg"
     },
     {
       "id": "13",
       "name": "1 Litre Skimmed Milk",
       "price": "₹40",
       "description": "Fat-free and nutritious skimmed milk",
-      "img": "https://example.com/1litre-skimmed-milk.png"
+      "img": "https://www.amazon.in/images/I/71F1jvlM60L._SX522_.jpg"
     },
     {
       "id": "14",
       "name": "200g Cheese",
       "price": "₹120",
       "description": "Fresh and creamy cheese",
-      "img": "https://example.com/200g-cheese.png"
+      "img": "https://www.towntokri.com/wp-content/uploads/2020/06/amul-cheese-200g.jpg"
     },
     {
       "id": "15",
       "name": "500ml Lassi",
       "price": "₹30",
       "description": "Refreshing and traditional lassi",
-      "img": "https://example.com/500ml-lassi.png"
+      "img": "https://www.amazon.in/images/I/71BI+5OdyAL._SX522_.jpg"
     }
   ],
   "carts": [
