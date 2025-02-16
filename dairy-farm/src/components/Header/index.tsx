@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// src/components/Header.tsx
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Menu, X, User, ShoppingCart, LogOut, LogIn, UserPlus } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
@@ -8,6 +9,10 @@ const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
   const { user, logout } = useAuth();
+
+  useEffect(() => {
+    // Force update when user state changes
+  }, [user]);
 
   const handleNavigation = (path: string, requiresAuth?: boolean) => {
     if (requiresAuth && !user) {
