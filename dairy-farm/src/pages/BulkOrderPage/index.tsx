@@ -32,7 +32,7 @@ const BulkOrdersPage: React.FC = () => {
   }) => {
     try {
       // Send the bulk order to the server
-      await axios.post("http://localhost:5000/bulk-orders", order);
+      await axios.post("http://localhost:5000/bulkorders", order);
       alert("Bulk order submitted successfully!");
     } catch (error) {
       console.error("Error submitting bulk order:", error);
