@@ -43,10 +43,10 @@ const Subscribe: React.FC = () => {
       try {
         await axios.post("http://localhost:5000/carts", {
           ...formData,
-          status: "active", // New subscriptions start as active
+          status: "active", 
         });
 
-        // Redirect user to cart page after adding
+        
         navigate("/cart");
       } catch (error) {
         console.error("Error adding subscription to cart:", error);

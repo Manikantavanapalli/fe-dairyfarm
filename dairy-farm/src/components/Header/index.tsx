@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X, User, ShoppingCart, LogOut, LogIn, UserPlus, Package } from "lucide-react";
+import { Menu, X , ShoppingCart, LogOut, LogIn, UserPlus, Package } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import logo from "../../assets/images/LV Logo.png";
 
@@ -24,7 +24,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
           <img src={logo} alt="Milk Dairy Logo" className="h-12" />
-          <span className="text-xl font-bold text-gray-800">LV Milk Dairy Farm</span>
+          <span className="text-xl font-bold text-gray-800">LV Dairy Farm</span>
         </Link>
 
         <button className="lg:hidden focus:outline-none" onClick={() => setMenuOpen(!menuOpen)}>
