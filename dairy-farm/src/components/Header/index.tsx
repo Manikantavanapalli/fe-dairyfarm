@@ -1,77 +1,70 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Menu, X, User, ShoppingCart, LogOut, LogIn, UserPlus } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Menu, X , ShoppingCart, LogOut, LogIn, UserPlus, Package } from "lucide-react";
+import { useAuth } from "../../context/AuthContext";
 import logo from "../../assets/images/LV Logo.png";
 
-interface HeaderProps {
-  isLoggedIn: boolean;
-  userName?: string;
-}
-
-const Header: React.FC<HeaderProps> = ({ isLoggedIn, userName }) => {
+const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
-  const menuItems = [
-    { path: "/products", label: "Products" },
-    { path: "/cart", label: "Cart", icon: <ShoppingCart size={18} className="inline-block ml-1" /> },
-    { path: "/subscribe", label: "Subscribe" },
-  ];
+  useEffect(() => {}, [user]);
+
+  const handleNavigation = (path: string, requiresAuth?: boolean) => {
+    if (requiresAuth && !user) {
+      navigate("/login");
+    } else {
+      navigate(path);
+    }
+  };
 
   return (
     <nav className="bg-white shadow-md p-4 sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
           <img src={logo} alt="Milk Dairy Logo" className="h-12" />
-          <span className="text-xl font-bold text-gray-800">Milk Dairy</span>
+          <span className="text-xl font-bold text-gray-800">LV Dairy Farm</span>
         </Link>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="lg:hidden focus:outline-none"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
+        <button className="lg:hidden focus:outline-none" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
 
-        {/* Navbar Links */}
-        <div
-          className={`lg:flex items-center space-x-6 ${menuOpen ? "block" : "hidden"} lg:block absolute lg:relative bg-white lg:bg-transparent top-full left-0 w-full lg:w-auto shadow-lg lg:shadow-none p-4 lg:p-0`}
-        >
+        <div className={`lg:flex lg:items-center lg:space-x-6 ${menuOpen ? "block" : "hidden"} lg:block mt-4 lg:mt-0`}>
           <ul className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-6 text-lg">
-            {menuItems.map((item, index) => (
-              <li key={index}>
-                <Link
-                  to={item.path}
-                  className="hover:text-green-500 transition flex items-center"
-                >
-                  {item.label} {item.icon}
-                </Link>
-              </li>
-            ))}
+            <li><Link to="/products" className="flex items-center">Products</Link></li>
+            <li>
+              <button onClick={() => handleNavigation("/cart", true)} className="flex items-center">
+                Cart <ShoppingCart size={18} className="ml-1" />
+              </button>
+            </li>
+            <li><Link to="/subscribe" className="flex items-center">Subscribe</Link></li>
+            <li><Link to="/bulkorders" className="flex items-center"><Package size={18} className="mr-2" />Bulk Orders</Link></li>
           </ul>
 
-          {/* User Section */}
-          {isLoggedIn ? (
-            <div className="relative group">
-              <button className="flex items-center space-x-2 font-semibold focus:outline-none">
-                <User size={20} />
-                <span>Hello, {userName}</span>
-              </button>
-              <div className="hidden group-hover:block absolute right-0 bg-white shadow-lg rounded-lg mt-2 w-40">
-                <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">Profile</Link>
-                <Link to="/orders" className="block px-4 py-2 hover:bg-gray-100">Orders</Link>
-                <Link to="/logout" className="block px-4 py-2 text-red-600 hover:bg-gray-100 flex items-center">
+          {user ? (
+            <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-6 space-y-4 lg:space-y-0 mt-4 lg:mt-0">
+              <div className="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-4">
+                <button onClick={() => handleNavigation("/profile", true)} className="flex items-center">Profile</button>
+                <button onClick={() => handleNavigation("/orders", true)} className="flex items-center">Orders</button>
+              </div>
+              <div className="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-4">
+                <div className="flex items-center space-x-2">
+                  <img src={user.profileImage} alt="Profile" className="w-10 h-10 rounded-full object-cover border-2 border-blue-500" />
+                  <span className="flex items-center">{user.name}</span>
+                </div>
+                <button onClick={() => { logout(); navigate("/login"); }} className="flex items-center text-red-600">
                   <LogOut size={16} className="mr-2" /> Logout
-                </Link>
+                </button>
               </div>
             </div>
           ) : (
-            <div className="flex space-x-3">
-              <Link to="/login" className="btn btn-primary flex items-center px-4 py-2 rounded-lg shadow-md">
+            <div className="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-3 mt-4 lg:mt-0">
+              <Link to="/login" className="flex items-center px-4 py-2 rounded-lg shadow-md">
                 <LogIn size={18} className="mr-2" /> Login
               </Link>
-              <Link to="/register" className="btn btn-success flex items-center px-4 py-2 rounded-lg shadow-md">
+              <Link to="/register" className="flex items-center px-4 py-2 rounded-lg shadow-md">
                 <UserPlus size={18} className="mr-2" /> Register
               </Link>
             </div>

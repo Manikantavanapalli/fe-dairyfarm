@@ -31,11 +31,18 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
   };
 
   return (
-    <nav aria-label="Page navigation">
-      <ul className="pagination justify-content-center">
+    <nav className="flex justify-center mt-10">
+      <ul className="inline-flex items-center gap-2">
         {/* Previous Button */}
-        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-          <button className="page-link" onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
+        <li>
+          <button
+            className={`px-4 py-2 rounded-lg ${currentPage === 1
+                ? "bg-gray-200 cursor-not-allowed"
+                : "bg-blue-600 text-white hover:bg-blue-700"
+              } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all`}
+            onClick={() => onPageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
             Previous
           </button>
         </li>
@@ -43,21 +50,34 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages, onPage
         {/* Page Numbers */}
         {getPageNumbers().map((page, index) =>
           typeof page === "number" ? (
-            <li key={index} className={`page-item ${page === currentPage ? "active" : ""}`}>
-              <button className="page-link" onClick={() => onPageChange(page)}>
+            <li key={index}>
+              <button
+                className={`px-4 py-2 rounded-lg ${page === currentPage
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200 hover:bg-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all`}
+                onClick={() => onPageChange(page)}
+              >
                 {page}
               </button>
             </li>
           ) : (
-            <li key={index} className="page-item disabled">
-              <span className="page-link">{page}</span>
+            <li key={index} className="px-4 py-2">
+              <span className="text-gray-500">{page}</span>
             </li>
           )
         )}
 
         {/* Next Button */}
-        <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
-          <button className="page-link" onClick={() => onPageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+        <li>
+          <button
+            className={`px-4 py-2 rounded-lg ${currentPage === totalPages
+                ? "bg-gray-200 cursor-not-allowed"
+                : "bg-blue-600 text-white hover:bg-blue-700"
+              } focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all`}
+            onClick={() => onPageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
             Next
           </button>
         </li>

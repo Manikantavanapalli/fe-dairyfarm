@@ -1,19 +1,19 @@
-import React from 'react';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import React from "react";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import { Outlet } from "react-router-dom";
 
-interface MainLayoutProps {
-  children: React.ReactNode;
-}
-
-const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+const MainLayout: React.FC = () => {
   return (
-    <div>
+    <>
       <Header />
-      <main>{children}</main>
+      <main className="container mt-4">
+        <Outlet /> {/* This renders the current page's content dynamically */}
+      </main>
       <Footer />
-    </div>
+    </>
   );
 };
 
 export default MainLayout;
+

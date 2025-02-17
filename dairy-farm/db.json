@@ -4,19 +4,259 @@
       "id": "1",
       "name": "John Doe",
       "email": "john@example.com",
-      "password": "123456"
+      "password": "123456",
+      "role": "user",
+      "phone": "+91 9550450945",
+      "address": "123, Green Avenue, New Delhi, India",
+      "pincode": "110001",
+      "profileImage": "https://via.placeholder.com/150"
     },
     {
-      "id": "350d",
-      "name": "manikanta",
+      "id": "2",
+      "name": "Jane Doe",
+      "email": "jane@example.com",
+      "password": "123456",
+      "role": "admin",
+      "phone": "+91 9876543210",
+      "address": "456, Red Avenue, Mumbai, India",
+      "pincode": "400001",
+      "profileImage": "https://randomuser.me/api/portraits/men/1.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Vanapalli manikanta",
       "email": "mani@gmail.com",
-      "password": "1234"
+      "password": "123456",
+      "role": "user",
+      "phone": "+91 9876543216",
+      "address": "456, Red Avenue, Mumbai, India",
+      "pincode": "355678",
+      "profileImage": "https://randomuser.me/api/portraits/men/2.jpg"
     },
     {
-      "id": "d1b6",
-      "name": "saigiri",
-      "email": "sai@gmail.com",
-      "password": "1234"
+      "id": "b6ad",
+      "name": "sivakumar Meesala",
+      "email": "siva@gmail.com",
+      "password": "123456",
+      "address": "9492929473"
+    }
+  ],
+  "products": [
+    {
+      "id": "1",
+      "name": "250ml Buffalo Milk",
+      "price": "₹20",
+      "description": "Fresh, pure & creamy",
+      "img": "https://erdencreamery.com/wp-content/uploads/2021/05/erdern-creamery-buffalo-milk.jpg"
+    },
+    {
+      "id": "2",
+      "name": "500ml Buffalo Milk",
+      "price": "₹40",
+      "description": "High-quality fresh milk",
+      "img": "https://erdencreamery.com/wp-content/uploads/2021/05/erdern-creamery-buffalo-milk.jpg"
+    },
+    {
+      "id": "3",
+      "name": "1 Litre Cow Milk",
+      "price": "₹50",
+      "description": "Pure and nutritious cow milk",
+      "img": "https://brundavanfarms.com/wp-content/uploads/2020/08/raw-cow-milk-1-litre.jpg"
+    },
+    {
+      "id": "4",
+      "name": "500ml Cow Milk",
+      "price": "₹30",
+      "description": "Fresh and healthy cow milk",
+      "img": "https://brundavanfarms.com/wp-content/uploads/2020/08/raw-cow-milk-1-litre.jpg"
+    },
+    {
+      "id": "5",
+      "name": "1 Litre Buffalo Milk",
+      "price": "₹60",
+      "description": "Rich and creamy buffalo milk",
+      "img": "https://brundavanfarms.com/wp-content/uploads/2020/08/raw-buffalo-milk-1-litre.jpg"
+    },
+    {
+      "id": "6",
+      "name": "200g Paneer",
+      "price": "₹80",
+      "description": "Fresh and soft paneer",
+      "img": "https://www.towntokri.com/wp-content/uploads/2020/06/amul-fresh-paneer-200g.jpg"
+    },
+    {
+      "id": "7",
+      "name": "500g Curd",
+      "price": "₹40",
+      "description": "Creamy and delicious curd",
+      "img": "https://www.amazon.in/images/I/71c9Wi9Z6lL._SX522_.jpg"
+    },
+    {
+      "id": "8",
+      "name": "1kg Butter",
+      "price": "₹200",
+      "description": "Pure and rich butter",
+      "img": "https://www.iceland.co.uk/images/I/71HHEf2UZtL._SX522_.jpg"
+    },
+    {
+      "id": "9",
+      "name": "500g Ghee",
+      "price": "₹300",
+      "description": "Pure and aromatic ghee",
+      "img": "https://www.iceland.co.uk/images/I/71c9Wi9Z6lL._SX522_.jpg"
+    },
+    {
+      "id": "10",
+      "name": "200ml Flavoured Milk (Chocolate)",
+      "price": "₹25",
+      "description": "Delicious chocolate-flavoured milk",
+      "img": "https://www.woolworths.com.au/images/I/71Mv1B+vjeL._SX522_.jpg"
+    },
+    {
+      "id": "11",
+      "name": "200ml Flavoured Milk (Strawberry)",
+      "price": "₹25",
+      "description": "Refreshing strawberry-flavoured milk",
+      "img": "https://www.woolworths.com.au/images/I/71Wzp0LXwIL._SX522_.jpg"
+    },
+    {
+      "id": "12",
+      "name": "500ml Toned Milk",
+      "price": "₹25",
+      "description": "Low-fat and healthy toned milk",
+      "img": "https://www.amazon.in/images/I/71uQXos2exL._SX522_.jpg"
+    },
+    {
+      "id": "13",
+      "name": "1 Litre Skimmed Milk",
+      "price": "₹40",
+      "description": "Fat-free and nutritious skimmed milk",
+      "img": "https://www.amazon.in/images/I/71F1jvlM60L._SX522_.jpg"
+    },
+    {
+      "id": "14",
+      "name": "200g Cheese",
+      "price": "₹120",
+      "description": "Fresh and creamy cheese",
+      "img": "https://www.towntokri.com/wp-content/uploads/2020/06/amul-cheese-200g.jpg"
+    },
+    {
+      "id": "15",
+      "name": "500ml Lassi",
+      "price": "₹30",
+      "description": "Refreshing and traditional lassi",
+      "img": "https://www.amazon.in/images/I/71BI+5OdyAL._SX522_.jpg"
+    }
+  ],
+  "carts": [
+    {
+      "id": "ba1f",
+      "name": "manikanta vanapalli",
+      "address": "texas",
+      "pincode": "J5B1Y1",
+      "deliverySchedule": "Evening (5:00 PM - 8:00 PM)",
+      "subscriptionDuration": "1 Year",
+      "milkQuantity": "250ml",
+      "customQuantity": "",
+      "status": "active"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD123",
+      "userId": "1",
+      "date": "Feb 5, 2024",
+      "total": "₹500",
+      "status": "Delivered",
+      "items": [
+        {
+          "id": 1739438255801,
+          "productId": "2",
+          "name": "500ml Buffalo Milk",
+          "price": 40,
+          "quantity": 2
+        }
+      ],
+      "shippingDetails": {
+        "name": "John Doe",
+        "address": "123, Green Avenue, New Delhi, India",
+        "phone": "+91 9550450945",
+        "pincode": "110001",
+        "landmark": "Near Park",
+        "paymentMethod": "Cash on Delivery"
+      }
+    },
+    {
+      "id": "ORD130510",
+      "userId": "1",
+      "date": "13 Feb 2025",
+      "total": "₹80",
+      "status": "Pending",
+      "items": [
+        {
+          "id": 1739445766026,
+          "productId": "2",
+          "name": "500ml Buffalo Milk",
+          "price": 40,
+          "quantity": 1
+        },
+        {
+          "id": 1739445769374,
+          "productId": "7",
+          "name": "500g Curd",
+          "price": 40,
+          "quantity": 1
+        }
+      ],
+      "shippingDetails": {
+        "name": "manikanta vanapalli",
+        "address": "texas\nroad no2",
+        "phone": "+91 9876543234",
+        "pincode": "J5B1Y1",
+        "landmark": "",
+        "paymentMethod": "Cash on Delivery"
+      }
+    },
+    {
+      "id": "ORD330229",
+      "userId": "1",
+      "date": "17 Feb 2025",
+      "total": "₹NaN",
+      "status": "Pending",
+      "items": [
+        {
+          "id": "ba1f",
+          "name": "manikanta vanapalli",
+          "address": "texas",
+          "pincode": "J5B1Y1",
+          "deliverySchedule": "Evening (5:00 PM - 8:00 PM)",
+          "subscriptionDuration": "1 Year",
+          "milkQuantity": "250ml",
+          "customQuantity": "",
+          "status": "active"
+        }
+      ],
+      "shippingDetails": {
+        "name": "manikanta vanapalli",
+        "address": "texas\nroad no2",
+        "phone": "+91 9550450945",
+        "pincode": "J5B1Y1",
+        "landmark": "",
+        "paymentMethod": "Cash on Delivery"
+      }
+    }
+  ],
+  "subscriptions": [
+    {
+      "id": "2dcc",
+      "name": "manikanta vanapalli",
+      "address": "texas",
+      "pincode": "J5B1Y1",
+      "deliverySchedule": "Morning (6:00 AM - 9:00 AM)",
+      "subscriptionDuration": "One Day",
+      "milkQuantity": "250ml",
+      "customQuantity": "",
+      "status": "active"
     }
   ]
 }

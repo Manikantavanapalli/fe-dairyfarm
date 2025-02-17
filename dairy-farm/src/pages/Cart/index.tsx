@@ -1,81 +1,114 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Cart: React.FC = () => {
-  const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState([
-    { id: 1, name: "250ml Buffalo Milk", price: 20, quantity: 1 },
-    { id: 2, name: "500ml Buffalo Milk", price: 40, quantity: 2 },
-  ]);
+interface Subscription {
+  id: number;
+  name: string;
+  subscriptionDuration: string;
+  milkQuantity: string;
+  status: "active" | "paused";
+  type: "subscription";
+}
 
-  const handleQuantityChange = (id: number, change: number) => {
-    setCartItems((prevItems) =>
-      prevItems
-        .map((item) =>
-          item.id === id ? { ...item, quantity: Math.max(1, item.quantity + change) } : item
-        )
-        .filter((item) => item.quantity > 0) // Remove item if quantity is 0
-    );
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  type: "product";
+}
+
+type CartItem = Subscription | Product;
+
+const Cart: React.FC = () => {
+  const [cart, setCart] = useState<CartItem[]>([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchCart = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/carts");
+        setCart(response.data);
+      } catch (error) {
+        console.error("Error fetching cart:", error);
+      }
+    };
+
+    fetchCart();
+  }, []);
+
+  const handlePauseSubscription = async (id: number) => {
+    try {
+      await axios.patch(`http://localhost:5000/carts/${id}`, { status: "paused" });
+      setCart(cart.map((item) => (item.id === id ? { ...item, status: "paused" } : item)));
+    } catch (error) {
+      console.error("Error pausing subscription:", error);
+    }
   };
 
-  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const handleResumeSubscription = async (id: number) => {
+    try {
+      await axios.patch(`http://localhost:5000/carts/${id}`, { status: "active" });
+      setCart(cart.map((item) => (item.id === id ? { ...item, status: "active" } : item)));
+    } catch (error) {
+      console.error("Error resuming subscription:", error);
+    }
+  };
+
+  const handleRemoveFromCart = async (id: number) => {
+    try {
+      await axios.delete(`http://localhost:5000/carts/${id}`);
+      setCart(cart.filter((item) => item.id !== id));
+    } catch (error) {
+      console.error("Error removing item:", error);
+    }
+  };
+
+  const handleCheckout = () => {
+    navigate("/checkout", { state: { cartItems: cart } });
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 py-12 px-6">
-      {/* Page Title */}
-      <div className="text-center mb-8">
-        <h2 className="text-4xl font-extrabold text-gray-900 drop-shadow-md">🛒 Your Cart</h2>
-        <p className="text-lg text-gray-600">Review your items before checkout.</p>
-      </div>
-
-      {/* Cart Container */}
-      <div className="max-w-3xl mx-auto bg-white shadow-xl rounded-2xl p-8 border border-gray-200">
-        {cartItems.length === 0 ? (
-          <p className="text-center text-gray-500 text-lg py-12">Your cart is empty. 🛍️</p>
-        ) : (
-          <>
-            {cartItems.map((item) => (
-              <div
-                key={item.id}
-                className="flex justify-between items-center border-b py-5 px-3 bg-gray-50 rounded-lg shadow-sm mb-4"
-              >
-                <div>
-                  <h5 className="text-lg font-semibold text-gray-800">{item.name}</h5>
-                  <p className="text-gray-600 font-medium">₹{item.price} x {item.quantity}</p>
-                </div>
-                <div className="flex items-center gap-4">
-                  <button
-                    onClick={() => handleQuantityChange(item.id, -1)}
-                    className="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition shadow-md"
-                  >
-                    −
-                  </button>
-                  <span className="text-xl font-semibold">{item.quantity}</span>
-                  <button
-                    onClick={() => handleQuantityChange(item.id, 1)}
-                    className="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 transition shadow-md"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-            ))}
-
-            {/* Total Price */}
-            <div className="flex justify-between items-center mt-8 border-t pt-6">
-              <h5 className="text-2xl font-bold text-gray-800">Total:</h5>
-              <h5 className="text-green-700 font-bold text-3xl">₹{totalPrice}</h5>
+    <div className="min-h-screen py-12 px-4">
+      <h2 className="text-4xl font-bold text-gray-900 text-center">🛒 Your Cart</h2>
+      <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-xl p-6">
+        {cart.map((item) => (
+          <div key={item.id} className="p-4 border rounded-lg flex justify-between items-center mb-4">
+            <div>
+              <strong>{item.name}</strong>
+              {item.type === "subscription" ? (
+                <p>
+                  {item.subscriptionDuration} - {item.milkQuantity} ({item.status})
+                </p>
+              ) : (
+                <p>₹{item.price} x {item.quantity}</p>
+              )}
             </div>
-
-            {/* Checkout Button */}
-            <button
-              onClick={() => navigate("/checkout")}
-              className="w-full bg-orange-500 text-white py-4 rounded-lg mt-6 font-bold text-xl hover:bg-orange-600 transition shadow-lg"
-            >
-              Proceed to Checkout →
-            </button>
-          </>
-        )}
+            <div className="flex gap-2">
+              {item.type === "subscription" && (
+                <button
+                  onClick={() => (item.status === "active" ? handlePauseSubscription(item.id) : handleResumeSubscription(item.id))}
+                  className={`px-3 py-1 ${item.status === "active" ? "bg-red-500" : "bg-green-500"} text-white rounded`}
+                >
+                  {item.status === "active" ? "Pause" : "Resume"}
+                </button>
+              )}
+              <button
+                onClick={() => handleRemoveFromCart(item.id)}
+                className="bg-gray-500 text-white px-3 py-1 rounded"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+        ))}
+        <button
+          onClick={handleCheckout}
+          className="w-full bg-blue-600 text-white py-3 rounded-lg text-lg font-bold hover:bg-blue-700 transition shadow-lg"
+        >
+          Proceed to Checkout
+        </button>
       </div>
     </div>
   );

@@ -1,54 +1,60 @@
 import React from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import twoFiftyMl from "../../assets/images/250ml.png";
+import fiveHundredMl from "../../assets/images/500ML.png";
+import sevenFiftyMl from "../../assets/images/750ML.png";
+import oneLitre from "../../assets/images/1Litre.png";
+import ProductCard from "../../components/productCard";
 
-const ProductDetail: React.FC = () => {
+const products = [
+  { id: 1, size: "250ml", price: "₹20", img: twoFiftyMl },
+  { id: 2, size: "500ml", price: "₹40", img: fiveHundredMl },
+  { id: 3, size: "750ml", price: "₹60", img: sevenFiftyMl },
+  { id: 4, size: "1 Litre", price: "₹80", img: oneLitre },
+];
+
+const ProductDetails: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const product = products.find((p) => p.id === Number(id));
+
+  if (!product) {
+    return <div className="text-center text-red-600 font-bold">Product not found</div>;
+  }
+
   return (
-    <div className="container my-5">
-      <div className="row">
-        {/* Product Image */}
-        <div className="col-md-6 text-center">
-          <img
-            src="https://via.placeholder.com/400"
-            alt="Product"
-            className="img-fluid rounded shadow"
-          />
-        </div>
-
-        {/* Product Details */}
-        <div className="col-md-6">
-          <h2 className="fw-bold">Buffalo Milk - 1 Litre</h2>
-          <p className="text-muted">Pure, fresh, and creamy buffalo milk delivered to your doorstep.</p>
-          <h4 className="text-success fw-bold">₹80</h4>
-
-          {/* Quantity Selector */}
-          <div className="my-3 d-flex align-items-center">
-            <label className="me-2 fw-bold">Quantity:</label>
-            <button className="btn btn-outline-secondary btn-sm me-2">-</button>
-            <span className="fw-bold">1</span>
-            <button className="btn btn-outline-secondary btn-sm ms-2">+</button>
-          </div>
-
-          {/* Buttons */}
-          <div className="d-flex gap-3">
-            <button className="btn btn-primary w-50 fw-bold">Add to Cart</button>
-            <button className="btn btn-success w-50 fw-bold">Buy Now</button>
-          </div>
-        </div>
+    <div className="min-h-screen bg-gray-100 py-10 px-4">
+      {/* Product Details Section */}
+      <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <img src={product.img} alt={product.size} className="w-full h-64 object-contain" />
+        <h2 className="text-3xl font-bold mt-4">{product.size} Buffalo Milk</h2>
+        <p className="text-gray-600 mt-2">Pure, fresh, and creamy buffalo milk delivered to your doorstep.</p>
+        <p className="text-green-600 font-bold text-2xl mt-2">{product.price}</p>
+        <button className="mt-4 bg-blue-600 text-white py-2 px-6 rounded-lg font-bold hover:bg-blue-700 transition-all">
+          Add to Cart 🛒
+        </button>
       </div>
 
-      {/* Customer Reviews */}
-      <div className="mt-5">
-        <h3 className="fw-bold">Customer Reviews</h3>
-
-        {[1, 2, 3].map((_, index) => (
-          <div key={index} className="border p-3 rounded my-3 shadow-sm">
-            <h5 className="fw-bold">John Doe</h5>
-            <p className="text-muted mb-1">⭐⭐⭐⭐☆</p>
-            <p className="mb-0">"Excellent quality milk. Tastes fresh and pure!"</p>
-          </div>
-        ))}
+      {/* Similar Products Section */}
+      <div className="max-w-6xl mx-auto mt-10">
+        <h3 className="text-2xl font-bold text-gray-800 mb-4">Similar Products</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          {products
+            .filter((p) => p.id !== product.id)
+            .map((similarProduct) => (
+              <ProductCard
+                key={similarProduct.id}
+                image={similarProduct.img}
+                title={similarProduct.size + " Buffalo Milk"}
+                price={similarProduct.price}
+                description="Fresh, pure & creamy"
+                onAddToCart={() => console.log("Added to cart")}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );
 };
 
-export default ProductDetail;
+export default ProductDetails;
