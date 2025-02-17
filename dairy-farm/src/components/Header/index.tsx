@@ -52,7 +52,7 @@ const Header: React.FC = () => {
               <div className="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-4">
                 <div className="flex items-center space-x-2">
                   <img src={user.profileImage} alt="Profile" className="w-10 h-10 rounded-full object-cover border-2 border-blue-500" />
-                  <span className="flex items-center"><User size={20} className="mr-2" />{user.name}</span>
+                  <span className="flex items-center">{user.name}</span>
                 </div>
                 <button onClick={() => { logout(); navigate("/login"); }} className="flex items-center text-red-600">
                   <LogOut size={16} className="mr-2" /> Logout
