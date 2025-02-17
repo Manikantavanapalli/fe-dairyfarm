@@ -5,6 +5,7 @@ import Skeleton from "../components/Skeleton";
 import PrivateRoute from "../components/ProtectedRoute";
 import AdminRoute from "../components/AdminRoute";
 import { useAuth } from "../context/AuthContext";
+import BulkOrdersPage from "../pages/BulkOrderPage";
 
 // Lazy-loaded components
 const LandingPage = lazy(() => import("../pages/LandingPage"));
@@ -34,6 +35,7 @@ const AppRoutes: React.FC = () => {
           <Route path="products" element={<Products currentUser={user ? user.id : null} />} />
           <Route path="products/:id" element={<ProductDetails />} />
           <Route path="subscribe" element={<Subscribe />} />
+          <Route path="bulkorders" element={<BulkOrdersPage />}/>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="*" element={<NotFound />} />
@@ -43,6 +45,7 @@ const AppRoutes: React.FC = () => {
           <Route path="checkout" element={<PrivateRoute><Checkout /></PrivateRoute>}/>
           <Route path="profile" element={<PrivateRoute><Profile userId={user?.id as string} /></PrivateRoute>} />
           <Route path="orders" element={<PrivateRoute> <Orders /></PrivateRoute>}/>
+         
 
           {/* Admin Routes (Only accessible for admin users) */}
           <Route path="admin" element={<AdminRoute><AdminDashboard /></AdminRoute> }/>

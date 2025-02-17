@@ -1,6 +1,7 @@
+// src/pages/Login.tsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../../services/AuthService";
+import { useAuth } from "../../context/AuthContext";
 import logo from "../../assets/images/LV Logo.png";
 
 const Login: React.FC = () => {
@@ -8,18 +9,17 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
     try {
-      const user = await loginUser(email, password);
-      console.log(`Welcome, ${user.name}!`);
-      localStorage.setItem("user", JSON.stringify(user));
+      await login(email, password);
       navigate("/"); // Redirect to the landing page after login
     } catch (err) {
-      setError("Invalid email or password.");
+      setError("Invalid email or password. Please try again.");
     }
   };
 
