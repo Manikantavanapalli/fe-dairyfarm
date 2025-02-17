@@ -148,31 +148,7 @@
       "img": "https://www.amazon.in/images/I/71BI+5OdyAL._SX522_.jpg"
     }
   ],
-  "carts": [
-    {
-      "id": "1",
-      "userId": "1",
-      "items": [
-        {
-          "id": 1739438255801,
-          "productId": "2",
-          "name": "500ml Buffalo Milk",
-          "price": 40,
-          "quantity": 2
-        }
-      ]
-    },
-    {
-      "id": "d4da",
-      "userId": "3",
-      "items": []
-    },
-    {
-      "id": "17f7",
-      "userId": "3",
-      "items": []
-    }
-  ],
+  "carts": [],
   "orders": [
     {
       "id": "ORD123",
@@ -230,5 +206,17 @@
       }
     }
   ],
-  "subscriptions": []
+  "subscriptions": [
+    {
+      "id": "2dcc",
+      "name": "manikanta vanapalli",
+      "address": "texas",
+      "pincode": "J5B1Y1",
+      "deliverySchedule": "Morning (6:00 AM - 9:00 AM)",
+      "subscriptionDuration": "One Day",
+      "milkQuantity": "250ml",
+      "customQuantity": "",
+      "status": "active"
+    }
+  ]
 }
