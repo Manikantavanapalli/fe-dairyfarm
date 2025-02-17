@@ -8,7 +8,7 @@
       "role": "user",
       "phone": "+91 9550450945",
       "address": "123, Green Avenue, New Delhi, India",
-      "pincode": "110001",
+      "pincode": "1100012",
       "profileImage": "https://via.placeholder.com/150"
     },
     {
@@ -147,11 +147,18 @@
       "userId": "1",
       "items": [
         {
-          "id": 1739438255801,
-          "productId": "2",
-          "name": "500ml Buffalo Milk",
-          "price": 40,
-          "quantity": 2
+          "id": 1739513978430,
+          "productId": "15",
+          "name": "500ml Lassi",
+          "price": 30,
+          "quantity": 4
+        },
+        {
+          "id": 1739514192415,
+          "productId": "6",
+          "name": "200g Paneer",
+          "price": 80,
+          "quantity": 1
         }
       ]
     },
