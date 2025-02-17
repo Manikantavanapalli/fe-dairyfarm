@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 interface Order {
   id: string;
@@ -11,6 +12,8 @@ interface Order {
     name: string;
     price: number;
     quantity: number;
+    type: "subscription" | "product";
+    status?: "active" | "paused";
   }[];
   shippingDetails: {
     name: string;
@@ -26,13 +29,42 @@ const Orders = () => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [filter, setFilter] = useState("All");
 
-  // Fetch Orders from Mock API
   useEffect(() => {
-    fetch("http://localhost:5000/orders")
-      .then((response) => response.json())
-      .then((data: Order[]) => setOrders(data))
-      .catch((error) => console.error("Error fetching orders:", error));
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/orders");
+        setOrders(response.data);
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    };
+
+    fetchOrders();
   }, []);
+
+  const handlePauseSubscription = async (orderId: string, itemId: number) => {
+    try {
+      await axios.patch(`http://localhost:5000/orders/${orderId}/items/${itemId}`, { status: "paused" });
+      setOrders(orders.map((order) => ({
+        ...order,
+        items: order.items.map((item) => (item.id === itemId ? { ...item, status: "paused" } : item)),
+      })));
+    } catch (error) {
+      console.error("Error pausing subscription:", error);
+    }
+  };
+
+  const handleResumeSubscription = async (orderId: string, itemId: number) => {
+    try {
+      await axios.patch(`http://localhost:5000/orders/${orderId}/items/${itemId}`, { status: "active" });
+      setOrders(orders.map((order) => ({
+        ...order,
+        items: order.items.map((item) => (item.id === itemId ? { ...item, status: "active" } : item)),
+      })));
+    } catch (error) {
+      console.error("Error resuming subscription:", error);
+    }
+  };
 
   const filteredOrders = filter === "All" ? orders : orders.filter((order) => order.status === filter);
 
@@ -45,11 +77,10 @@ const Orders = () => {
             <button
               key={status}
               onClick={() => setFilter(status)}
-              className={`px-4 py-2 rounded-lg font-medium shadow-md transition ${
-                filter === status
+              className={`px-4 py-2 rounded-lg font-medium shadow-md transition ${filter === status
                   ? "bg-blue-600 text-white"
                   : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-              }`}
+                }`}
             >
               {status}
             </button>
@@ -64,6 +95,7 @@ const Orders = () => {
                   <th className="py-3 px-5 text-left">Date</th>
                   <th className="py-3 px-5 text-left">Status</th>
                   <th className="py-3 px-5 text-left">Amount</th>
+                  <th className="py-3 px-5 text-left">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -73,18 +105,41 @@ const Orders = () => {
                     <td className="py-3 px-5">{order.date}</td>
                     <td className="py-3 px-5">
                       <span
-                        className={`px-3 py-1 rounded-full text-sm font-medium ${
-                          order.status === "Delivered"
+                        className={`px-3 py-1 rounded-full text-sm font-medium ${order.status === "Delivered"
                             ? "bg-green-200 text-green-700"
                             : order.status === "Pending"
-                            ? "bg-yellow-200 text-yellow-700"
-                            : "bg-red-200 text-red-700"
-                        }`}
+                              ? "bg-yellow-200 text-yellow-700"
+                              : "bg-red-200 text-red-700"
+                          }`}
                       >
                         {order.status}
                       </span>
                     </td>
                     <td className="py-3 px-5 font-semibold">{order.total}</td>
+                    <td className="py-3 px-5">
+                      {order.items.map((item) => (
+                        item.type === "subscription" && (
+                          <div key={item.id} className="flex items-center gap-2">
+                            <span>{item.name}</span>
+                            {item.status === "active" ? (
+                              <button
+                                onClick={() => handlePauseSubscription(order.id, item.id)}
+                                className="bg-red-500 text-white px-2 py-1 rounded"
+                              >
+                                Pause
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => handleResumeSubscription(order.id, item.id)}
+                                className="bg-green-500 text-white px-2 py-1 rounded"
+                              >
+                                Resume
+                              </button>
+                            )}
+                          </div>
+                        )
+                      ))}
+                    </td>
                   </tr>
                 ))}
               </tbody>

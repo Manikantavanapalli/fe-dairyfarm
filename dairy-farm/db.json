@@ -148,7 +148,19 @@
       "img": "https://www.amazon.in/images/I/71BI+5OdyAL._SX522_.jpg"
     }
   ],
-  "carts": [],
+  "carts": [
+    {
+      "id": "ba1f",
+      "name": "manikanta vanapalli",
+      "address": "texas",
+      "pincode": "J5B1Y1",
+      "deliverySchedule": "Evening (5:00 PM - 8:00 PM)",
+      "subscriptionDuration": "1 Year",
+      "milkQuantity": "250ml",
+      "customQuantity": "",
+      "status": "active"
+    }
+  ],
   "orders": [
     {
       "id": "ORD123",
@@ -200,6 +212,34 @@
         "name": "manikanta vanapalli",
         "address": "texas\nroad no2",
         "phone": "+91 9876543234",
+        "pincode": "J5B1Y1",
+        "landmark": "",
+        "paymentMethod": "Cash on Delivery"
+      }
+    },
+    {
+      "id": "ORD330229",
+      "userId": "1",
+      "date": "17 Feb 2025",
+      "total": "₹NaN",
+      "status": "Pending",
+      "items": [
+        {
+          "id": "ba1f",
+          "name": "manikanta vanapalli",
+          "address": "texas",
+          "pincode": "J5B1Y1",
+          "deliverySchedule": "Evening (5:00 PM - 8:00 PM)",
+          "subscriptionDuration": "1 Year",
+          "milkQuantity": "250ml",
+          "customQuantity": "",
+          "status": "active"
+        }
+      ],
+      "shippingDetails": {
+        "name": "manikanta vanapalli",
+        "address": "texas\nroad no2",
+        "phone": "+91 9550450945",
         "pincode": "J5B1Y1",
         "landmark": "",
         "paymentMethod": "Cash on Delivery"
