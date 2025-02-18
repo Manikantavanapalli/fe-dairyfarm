@@ -47,7 +47,7 @@
       "name": "250ml Buffalo Milk",
       "price": "₹20",
       "description": "Fresh, pure & creamy",
-      "img": "/images/250ml.png"
+      "img": "../src/assets/images/250ml.png"
     },
     {
       "id": "2",
