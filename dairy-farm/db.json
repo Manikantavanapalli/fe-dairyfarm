@@ -201,7 +201,7 @@
           "productId": "8",
           "name": "1kg Butter",
           "price": 200,
-          "quantity": 3
+          "quantity": 4
         },
         {
           "id": 1739789467357,
@@ -222,6 +222,13 @@
           "productId": "3",
           "name": "1 Litre Cow Milk",
           "price": 50,
+          "quantity": 1
+        },
+        {
+          "id": 1739804450128,
+          "productId": "7",
+          "name": "500g Curd",
+          "price": 40,
           "quantity": 1
         }
       ]
