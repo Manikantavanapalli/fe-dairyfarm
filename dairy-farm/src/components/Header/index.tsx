@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Menu, X, User, ShoppingCart, LogOut, LogIn, UserPlus, Package } from "lucide-react";
+import { Menu, X , ShoppingCart, LogOut, LogIn, UserPlus, Package } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import logo from "../../assets/images/LV Logo.png";
 
@@ -24,7 +24,7 @@ const Header: React.FC = () => {
       <div className="container mx-auto flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
           <img src={logo} alt="Milk Dairy Logo" className="h-12" />
-          <span className="text-xl font-bold text-gray-800">LV Milk Dairy Farm</span>
+          <span className="text-xl font-bold text-gray-800">LV Dairy Farm</span>
         </Link>
 
         <button className="lg:hidden focus:outline-none" onClick={() => setMenuOpen(!menuOpen)}>
@@ -52,7 +52,7 @@ const Header: React.FC = () => {
               <div className="flex flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-4">
                 <div className="flex items-center space-x-2">
                   <img src={user.profileImage} alt="Profile" className="w-10 h-10 rounded-full object-cover border-2 border-blue-500" />
-                  <span className="flex items-center"><User size={20} className="mr-2" />{user.name}</span>
+                  <span className="flex items-center">{user.name}</span>
                 </div>
                 <button onClick={() => { logout(); navigate("/login"); }} className="flex items-center text-red-600">
                   <LogOut size={16} className="mr-2" /> Logout

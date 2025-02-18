@@ -6,6 +6,7 @@ interface CartItem {
   name: string;
   price: number;
   quantity: number;
+  type: "subscription" | "product";
 }
 
 const Checkout: React.FC = () => {
@@ -13,9 +14,8 @@ const Checkout: React.FC = () => {
   const location = useLocation();
   const cartItems: CartItem[] = location.state?.cartItems || [];
 
-  const totalPrice = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
+  const totalPrice = cartItems.reduce((total, item) => total + item.price * (item.quantity || 1), 0);
 
-  // Form State
   const [formData, setFormData] = useState({
     name: "",
     address: "",
@@ -27,16 +27,14 @@ const Checkout: React.FC = () => {
 
   const [orderPlaced, setOrderPlaced] = useState(false);
 
-  // Handle Input Changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Save Order to Backend
   const saveOrder = async () => {
     const order = {
-      id: `ORD${Math.floor(Math.random() * 1000000)}`, // Generate a unique order ID
-      userId: "1", // Replace with actual user ID from your auth system
+      id: `ORD${Math.floor(Math.random() * 1000000)}`,
+      userId: "1",
       date: new Date().toLocaleDateString("en-GB", {
         day: "numeric",
         month: "short",
@@ -68,7 +66,6 @@ const Checkout: React.FC = () => {
     }
   };
 
-  // Handle Form Submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (formData.name && formData.address && formData.phone && formData.pincode) {
@@ -77,23 +74,20 @@ const Checkout: React.FC = () => {
         setOrderPlaced(true);
         setTimeout(() => {
           navigate("/orders");
-        }, 3000); // Navigate after 3 seconds
+        }, 3000);
       }
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-12 px-6">
-      {/* Page Title */}
       <div className="text-center mb-8">
         <h2 className="text-4xl font-extrabold text-gray-900 drop-shadow-md">🛍️ Checkout</h2>
         <p className="text-lg text-gray-600">Complete your order by providing your details.</p>
       </div>
 
-      {/* Checkout Container */}
       <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-8 border border-gray-200">
         {orderPlaced ? (
-          // Order Confirmation Section
           <div className="text-center">
             <h3 className="text-3xl font-bold text-green-600">🎉 Order Placed Successfully!</h3>
             <p className="text-gray-600 mt-2">Thank you, <span className="font-semibold">{formData.name}</span>. Your order will be delivered soon.</p>
@@ -106,14 +100,13 @@ const Checkout: React.FC = () => {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Order Summary */}
             <div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4">🛒 Order Summary</h3>
               <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
                 {cartItems.map((item) => (
                   <div key={item.id} className="flex justify-between items-center border-b py-3">
                     <h5 className="text-lg font-semibold text-gray-700">{item.name}</h5>
-                    <p className="text-gray-500">₹{item.price} x {item.quantity}</p>
+                    <p className="text-gray-500">₹{item.price} x {item.quantity || 1}</p>
                   </div>
                 ))}
                 <div className="flex justify-between items-center mt-4 border-t pt-4">
@@ -123,7 +116,6 @@ const Checkout: React.FC = () => {
               </div>
             </div>
 
-            {/* User Details Form */}
             <div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4">📋 Shipping Details</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -171,7 +163,6 @@ const Checkout: React.FC = () => {
                   className="w-full border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
 
-                {/* Payment Method */}
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800">💳 Payment Method</h3>
                   <select
@@ -184,7 +175,6 @@ const Checkout: React.FC = () => {
                   </select>
                 </div>
 
-                {/* Buttons */}
                 <div className="flex justify-between mt-4">
                   <button
                     type="button"

@@ -150,88 +150,15 @@
   ],
   "carts": [
     {
-      "id": "1",
-      "userId": "1",
-      "items": [
-        {
-          "id": 1739803578351,
-          "productId": "8",
-          "name": "1kg Butter",
-          "price": 200,
-          "quantity": 1
-        },
-        {
-          "id": 1739803582747,
-          "productId": "9",
-          "name": "500g Ghee",
-          "price": 300,
-          "quantity": 1
-        }
-      ]
-    },
-    {
-      "id": "d4da",
-      "userId": "3",
-      "items": []
-    },
-    {
-      "id": "17f7",
-      "userId": "3",
-      "items": []
-    },
-    {
-      "id": "c610",
-      "items": [
-        {
-          "id": 1739785433589,
-          "productId": "9",
-          "name": "500g Ghee",
-          "price": 300,
-          "quantity": 2
-        },
-        {
-          "id": 1739785676742,
-          "productId": "10",
-          "name": "200ml Flavoured Milk (Chocolate)",
-          "price": 25,
-          "quantity": 1
-        },
-        {
-          "id": 1739785885148,
-          "productId": "8",
-          "name": "1kg Butter",
-          "price": 200,
-          "quantity": 4
-        },
-        {
-          "id": 1739789467357,
-          "productId": "6",
-          "name": "200g Paneer",
-          "price": 80,
-          "quantity": 4
-        },
-        {
-          "id": 1739803596268,
-          "productId": "11",
-          "name": "200ml Flavoured Milk (Strawberry)",
-          "price": 25,
-          "quantity": 1
-        },
-        {
-          "id": 1739803653257,
-          "productId": "3",
-          "name": "1 Litre Cow Milk",
-          "price": 50,
-          "quantity": 1
-        },
-        {
-          "id": 1739804450128,
-          "productId": "7",
-          "name": "500g Curd",
-          "price": 40,
-          "quantity": 1
-        }
-      ]
+      "id": "ba1f",
+      "name": "manikanta vanapalli",
+      "address": "texas",
+      "pincode": "J5B1Y1",
+      "deliverySchedule": "Evening (5:00 PM - 8:00 PM)",
+      "subscriptionDuration": "1 Year",
+      "milkQuantity": "250ml",
+      "customQuantity": "",
+      "status": "active"
     }
   ],
   "orders": [
@@ -289,7 +216,47 @@
         "landmark": "",
         "paymentMethod": "Cash on Delivery"
       }
+    },
+    {
+      "id": "ORD330229",
+      "userId": "1",
+      "date": "17 Feb 2025",
+      "total": "₹NaN",
+      "status": "Pending",
+      "items": [
+        {
+          "id": "ba1f",
+          "name": "manikanta vanapalli",
+          "address": "texas",
+          "pincode": "J5B1Y1",
+          "deliverySchedule": "Evening (5:00 PM - 8:00 PM)",
+          "subscriptionDuration": "1 Year",
+          "milkQuantity": "250ml",
+          "customQuantity": "",
+          "status": "active"
+        }
+      ],
+      "shippingDetails": {
+        "name": "manikanta vanapalli",
+        "address": "texas\nroad no2",
+        "phone": "+91 9550450945",
+        "pincode": "J5B1Y1",
+        "landmark": "",
+        "paymentMethod": "Cash on Delivery"
+      }
     }
   ],
-  "subscriptions": []
+  "subscriptions": [
+    {
+      "id": "2dcc",
+      "name": "manikanta vanapalli",
+      "address": "texas",
+      "pincode": "J5B1Y1",
+      "deliverySchedule": "Morning (6:00 AM - 9:00 AM)",
+      "subscriptionDuration": "One Day",
+      "milkQuantity": "250ml",
+      "customQuantity": "",
+      "status": "active"
+    }
+  ]
 }
