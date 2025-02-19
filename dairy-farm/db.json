@@ -54,113 +54,101 @@
       "name": "500ml Buffalo Milk",
       "price": "₹40",
       "description": "High-quality fresh milk",
-      "img": "/images/500ML.png"
+      "img": "../src/assets/images/500ML.png"
     },
     {
       "id": "3",
       "name": "1 Litre Cow Milk",
       "price": "₹50",
       "description": "Pure and nutritious cow milk",
-      "img": "/images/1Litre.png"
+      "img": "../src/assets/images/1Litre.png"
     },
     {
       "id": "4",
       "name": "500ml Cow Milk",
       "price": "₹30",
       "description": "Fresh and healthy cow milk",
-      "img": "/images/500mlCowMilk.jpg"
+      "img": "../src/assets/images/500mlCowMilk.jpg"
     },
     {
       "id": "5",
       "name": "1 Litre Buffalo Milk",
       "price": "₹60",
       "description": "Rich and creamy buffalo milk",
-      "img": "/images/1LitreBuffaloMilk.jpg"
+      "img": "../src/assets/images/1LitreBuffaloMilk.jpg"
     },
     {
       "id": "6",
       "name": "200g Paneer",
       "price": "₹80",
       "description": "Fresh and soft paneer",
-      "img": "/images/200gPaneer.jpg"
+      "img": "../src/assets/images/200gPaneer.jpg"
     },
     {
       "id": "7",
       "name": "500g Curd",
       "price": "₹40",
       "description": "Creamy and delicious curd",
-      "img": "/images/500gCurd.jpg"
+      "img": "../src/assets/images/500gCurd.jpg"
     },
     {
       "id": "8",
       "name": "1kg Butter",
       "price": "₹200",
       "description": "Pure and rich butter",
-      "img": "/images/1kgButter.jpg"
+      "img": "../src/assets/images/1kgButter.jpg"
     },
     {
       "id": "9",
       "name": "500g Ghee",
       "price": "₹300",
       "description": "Pure and aromatic ghee",
-      "img": "/images/500gGhee.jpg"
+      "img": "../src/assets/images/500gGhee.jpg"
     },
     {
       "id": "10",
       "name": "200ml Flavoured Milk (Chocolate)",
       "price": "₹25",
       "description": "Delicious chocolate-flavoured milk",
-      "img": "/images/200mlFlavouredMilk.jpg"
+      "img": "../src/assets/images/200mlFlavouredMilk.jpg"
     },
     {
       "id": "11",
       "name": "200ml Flavoured Milk (Strawberry)",
       "price": "₹25",
       "description": "Refreshing strawberry-flavoured milk",
-      "img": "/images/200mlFlavouredMilkStrawberry.jpg"
+      "img": "../src/assets/images/200mlFlavouredMilkStrawberry.jpg"
     },
     {
       "id": "12",
       "name": "500ml Toned Milk",
       "price": "₹25",
       "description": "Low-fat and healthy toned milk",
-      "img": "/images/500mlTonnedMilk.jpg"
+      "img": "../src/assets/images/500mlTonnedMilk.jpg"
     },
     {
       "id": "13",
       "name": "1 Litre Skimmed Milk",
       "price": "₹40",
       "description": "Fat-free and nutritious skimmed milk",
-      "img": "/images/1LitreSkimmedMilk.jpg"
+      "img": "../src/assets/images/1LitreSkimmedMilk.jpg"
     },
     {
       "id": "14",
       "name": "200g Cheese",
       "price": "₹120",
       "description": "Fresh and creamy cheese",
-      "img": "/images/200gCheese.jpg"
+      "img": "../src/assets/images/200gCheese.jpg"
     },
     {
       "id": "15",
       "name": "500ml Lassi",
       "price": "₹30",
       "description": "Refreshing and traditional lassi",
-      "img": "/images/500mlLassi.jpg"
+      "img": "../src/assets/images/500mlLassi.jpg"
     }
   ],
-  "carts": [
-    {
-      "id": "ba1f",
-      "name": "manikanta vanapalli",
-      "address": "texas",
-      "pincode": "J5B1Y1",
-      "deliverySchedule": "Evening (5:00 PM - 8:00 PM)",
-      "subscriptionDuration": "1 Year",
-      "milkQuantity": "250ml",
-      "customQuantity": "",
-      "status": "active"
-    }
-  ],
+  "carts": [],
   "orders": [
     {
       "id": "ORD123",

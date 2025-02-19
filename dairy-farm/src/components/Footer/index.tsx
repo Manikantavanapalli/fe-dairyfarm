@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
               Milk Dairy provides fresh and organic dairy products straight from farms to your doorstep.
             </p>
             <Link 
-              to="/about" 
+              to="/LearnMore"
               className="text-green-400 hover:text-green-300 hover:underline text-sm transition duration-300"
             >
               Learn More

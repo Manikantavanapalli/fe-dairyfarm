@@ -23,6 +23,10 @@ const AdminDashboard = lazy(() => import("../pages/Admin/AdminDashboard"));
 const ManageOrders = lazy(() => import("../pages/Admin/ManageOrders"));
 const ManageProducts = lazy(() => import("../pages/Admin/ManageProducts"));
 const ManageUsers = lazy(() => import("../pages/Admin/ManageUsers"));
+const LearnMore = lazy(()=> import("../components/FooterPages/LearnAbout"));
+const FAQ = lazy(()=>import("../components/FooterPages/FAQ/index"));
+const PrivacyPolicy = lazy(()=>import("../components/FooterPages/Privacy-Policy/index"));
+const TermsConditions = lazy(()=>import("../components/FooterPages/Terms-Conditions/index"));
 
 const AppRoutes: React.FC = () => {
   const { user } = useAuth();
@@ -38,6 +42,10 @@ const AppRoutes: React.FC = () => {
           <Route path="bulkorders" element={<BulkOrdersPage />}/>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="LearnMore" element={<LearnMore/>}/>
+          <Route path="terms-conditions" element={<TermsConditions/>}/>
+          <Route path="privacy-policy" element={<PrivacyPolicy/>}/>
+          <Route path="faq" element={<FAQ/>}/>
           <Route path="*" element={<NotFound />} />
 
           {/* Private Routes (Only accessible after login) */}
